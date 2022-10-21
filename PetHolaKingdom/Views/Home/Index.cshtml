@@ -1,0 +1,204 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="banner-outer">
+    <div class="banner-slider">
+        <div class="slide1" style="background: url(../../Assets/images/meo-cun-pet-shop-banner.jpg)">
+            <div class="container">
+                <div class="content animated fadeInRight">
+                    <div class="fl-right">
+                        <h1 class="animated fadeInRight">Explore the World of <span class="animated fadeInRight">Our Graduates</span> </h1>
+                        <p class="animated fadeInRight">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide2" style="background: url(../../Assets/images/pngtree-cute-orange-pet-shop-promotion-banner-image_194564.jpg) ">
+            <div class="container">
+                <div class="content">
+                    <h1 class="animated fadeInUp">MBA Marketing</h1>
+                    <p class="animated fadeInUp">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide3" style="background: url(../../Assets/images/banner2-Pet-food.jpg) ">
+            <div class="container">
+                <div class="content animated fadeInLeft">
+                    <h1 class="animated fadeInLeft">Online MBA</h1>
+                    <p class="animated fadeInLeft">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="search-box" style="position:absolute;top: 100px; z-index: 1000; left: 30%;width: 40%;">
+        <input type="text" value="Search Job..." id="txtsearchbox" style="height: 50px;margin-right: 20px; padding: 20px; width: 70%;" />
+        <input type="button" id="btnsearch" value=" Click Now!" style="height: 50px;background: red;color: white;width: 17%;border: none;" />
+        </div>*@
+</div>
+<!-- End Banner Carousel -->
+<!-- Start About Section -->
+<section class="about">
+    <div class="container">
+        <ul class="row our-links">
+            <li class="col-sm-4 apply-online clearfix equal-hight">
+                <div class="icon"><img src="~/Assets/images/imageshome/apply-online-ico.png" class="img-responsive" alt=""></div>
+                <div class="detail">
+                    <h3>Đăt lịch khám online</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing...</p>
+                    <a href="" class="more"><i class="fa fa-check" aria-hidden="true"></i></a>
+                </div>
+            </li>
+            <li class="col-sm-4 prospects clearfix equal-hight">
+                <div class="icon"><img src="~/Assets/images/imageshome/prospects-ico.png" class="img-responsive" alt=""></div>
+                <div class="detail">
+                    <h3>Quy trình khám tự động</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing...</p>
+                    <a href="#" class="more"><i class="fa fa-check" aria-hidden="true"></i></a>
+                </div>
+            </li>
+            <li class="col-sm-4 certification clearfix equal-hight">
+                <div class="icon"><img src="~/Assets/images/imageshome/certification-ico.png" class="img-responsive" alt=""></div>
+                <div class="detail">
+                    <h3>Kiểm tra kết quả online</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing...</p>
+                    <a href="/" class="more"><i class="fa fa-check" aria-hidden="true"></i></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- End About Section -->
+<section class="news-events padding-lg">
+    <div class="container">
+        <h2>Khóa huấn luyện mới nhất</h2>
+        <ul class="row cs-style-3">
+            @{
+                var lstCourse = ViewBag.lstcourse;
+                foreach (var item in lstCourse)
+                {
+                    <li class="col-sm-3">
+                        <div class="inner">
+                            <figure>
+                                <img src="@item.ThumbNail" class="img-responsive" style="width:200px;height:200px;">
+                                <figcaption>
+                                    <div class="cnt-block">
+                                        <a href="news.html" class="plus-icon"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                        <h3>@item.ThumbNail</h3>
+                                        <div class="bottom-block clearfix">
+                                            <div class="date">
+                                                <div class="icon"><span class="icon-calander-icon"></span></div>
+                                                <span>@item.CreatedDate</span> 
+                                            </div>
+                                            <div class="comment">
+                                                <div class="icon"><span class="icon-chat-icon"></span></div>
+                                                <span>24</span> comments
+                                            </div>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </li>
+                }
+            }
+
+        </ul>
+        <div class="know-more-wrapper"> <a href="news.html" class="know-more">More Post <span class="icon-more-icon"></span></a> </div>
+    </div>
+</section>
+<!-- End New & Events Section -->
+<!-- Start New & Events Section -->
+<section class="news-events padding-lg">
+    <div class="container">
+        <h2>Tin tức nổi bật</h2>
+        <ul class="row cs-style-3">
+            @{ 
+                var lstBlog = ViewBag.lstblog;
+                foreach (var item in lstBlog)
+            {
+                        <li class="col-sm-3">
+                            <div class="inner">
+                                <figure>
+                                    <img src="@item.ThumbNail" class="img-responsive">
+                                    <figcaption>
+                                        <div class="cnt-block">
+                                            <a href="news.html" class="plus-icon"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                            <h3>@item.Title</h3>
+                                            <div class="bottom-block clearfix">
+                                                <div class="date">
+                                                    <div class="icon"><span class="icon-calander-icon"></span></div>
+                                                    <span>14 Feb</span> 2017
+                                                </div>
+                                                <div class="comment">
+                                                    <div class="icon"><span class="icon-chat-icon"></span></div>
+                                                    <span>24</span> comments
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </li>
+            }
+            }
+            
+         
+        </ul>
+        <div class="know-more-wrapper"> <a href="news.html" class="know-more">More Post <span class="icon-more-icon"></span></a> </div>
+    </div>
+</section>
+<!-- End New & Events Section -->
+<!-- Start Campus Tour Section -->
+<section class="campus-tour padding-lg">
+    <div class="container">
+        <h2>BỘ SƯU TẬP TOP THÚ CƯNG 2022</h2>
+    </div>
+    <ul class="gallery clearfix">
+     
+
+
+    </ul>
+</section>
+<!-- End Campus Tour Section -->
+<!-- Start logos Section -->
+<!-- End logos Section -->
+<!-- Start Testimonial -->
+<!-- End Testimonial -->
+<!-- Start Footer -->
+<script>
+    $(document).ready(function () {
+        $(".owl-carousel").owlCarousel({
+            autoPlay: 3000,
+            items: 4,
+            itemsDesktop: [1199, 3],
+            itemsDesktopSmall: [979, 3],
+            center: true,
+            nav: true,
+            loop: true,
+            responsive: {
+                600: {
+                    items: 4
+                }
+            }
+        });
+
+    });
+    $('.carousel[data-type="multi"] .item').each(function () {
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (var i = 0; i < 2; i++) {
+            next = next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>
+
