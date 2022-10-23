@@ -14,7 +14,14 @@ namespace PetHolaKingdom.Models
     
     public partial class Level
     {
+        public Level()
+        {
+            this.Lessons = new HashSet<Lesson>();
+        }
+    
         public int id { get; set; }
         public string Name { get; set; }
+    
+        public virtual ICollection<Lesson> Lessons { get; set; }
     }
 }

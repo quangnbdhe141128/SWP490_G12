@@ -17,11 +17,13 @@
         <EntityTypeShape EntityType="PetHolaKingdomModel.Role" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PetHolaKingdomModel.UserRole" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PetHolaKingdomModel.User" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <AssociationConnector Association="PetHolaKingdomModel.FK_Lessons_Course" ManuallyRouted="false" />
         <AssociationConnector Association="PetHolaKingdomModel.FK_Pet_User" ManuallyRouted="false" />
         <AssociationConnector Association="PetHolaKingdomModel.FK_PetsHistory_Pets" ManuallyRouted="false" />
         <AssociationConnector Association="PetHolaKingdomModel.FK_UserRole_Role" ManuallyRouted="false" />
         <AssociationConnector Association="PetHolaKingdomModel.FK_UserRole_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.sysdiagram" Width="1.5" PointX="10.375" PointY="7.75" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_Lessons_Courses" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_Lessons_Level" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

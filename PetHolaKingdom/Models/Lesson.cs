@@ -23,6 +23,7 @@ namespace PetHolaKingdom.Models
         public int CourseCategoryId { get; set; }
         public int LessonLevel { get; set; }
     
-        public virtual Course Cours { get; set; }
+        public virtual Course Cours1 { get; set; }
+        public virtual Level Level { get; set; }
     }
 }

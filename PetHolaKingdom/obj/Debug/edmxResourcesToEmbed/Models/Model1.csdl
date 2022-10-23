@@ -32,7 +32,7 @@
     <Property Name="banner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="Lesson" Relationship="Self.FK_Lessons_Course" FromRole="Courses" ToRole="Lessons" />
+    <NavigationProperty Name="Lessons" Relationship="PetHolaKingdomModel.FK_Lessons_Courses" FromRole="Course" ToRole="Lesson" />
   </EntityType>
   <EntityType Name="Lesson">
     <Key>
@@ -43,10 +43,11 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="banner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="banner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="CourseCategoryId" Type="Int32" Nullable="false" />
     <Property Name="LessonLevel" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Cours" Relationship="Self.FK_Lessons_Course" FromRole="Lessons" ToRole="Courses" />
+    <NavigationProperty Name="Cours1" Relationship="PetHolaKingdomModel.FK_Lessons_Courses" FromRole="Lesson" ToRole="Course" />
+    <NavigationProperty Name="Level" Relationship="PetHolaKingdomModel.FK_Lessons_Level" FromRole="Lesson" ToRole="Level" />
   </EntityType>
   <EntityType Name="LessonsHistory">
     <Key>
@@ -62,6 +63,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Lessons" Relationship="PetHolaKingdomModel.FK_Lessons_Level" FromRole="Level" ToRole="Lesson" />
   </EntityType>
   <EntityType Name="PetCategory">
     <Key>
@@ -141,18 +143,6 @@
     <NavigationProperty Name="Pet" Relationship="Self.FK_Pet_User" FromRole="Users" ToRole="Pets" />
     <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRole_User" FromRole="Users" ToRole="UserRole" />
   </EntityType>
-  <Association Name="FK_Lessons_Course">
-    <End Role="Courses" Type="PetHolaKingdomModel.Course" Multiplicity="1" />
-    <End Role="Lessons" Type="Self.Lesson" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Courses">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Lessons">
-        <PropertyRef Name="id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Pet_User">
     <End Role="Users" Type="Self.User" Multiplicity="1" />
     <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
@@ -214,10 +204,6 @@
     <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
     <EntitySet Name="Users" EntityType="Self.User" />
-    <AssociationSet Name="FK_Lessons_Course" Association="Self.FK_Lessons_Course">
-      <End Role="Courses" EntitySet="Courses" />
-      <End Role="Lessons" EntitySet="Lessons" />
-    </AssociationSet>
     <AssociationSet Name="FK_Pet_User" Association="Self.FK_Pet_User">
       <End Role="Users" EntitySet="Users" />
       <End Role="Pets" EntitySet="Pets" />
@@ -234,5 +220,48 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="UserRole" EntitySet="UserRoles" />
     </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="PetHolaKingdomModel.sysdiagram" />
+    <AssociationSet Name="FK_Lessons_Courses" Association="PetHolaKingdomModel.FK_Lessons_Courses">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Lesson" EntitySet="Lessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lessons_Level" Association="PetHolaKingdomModel.FK_Lessons_Level">
+      <End Role="Level" EntitySet="Levels" />
+      <End Role="Lesson" EntitySet="Lessons" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Lessons_Courses">
+    <End Type="PetHolaKingdomModel.Course" Role="Course" Multiplicity="1" />
+    <End Type="PetHolaKingdomModel.Lesson" Role="Lesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="CourseCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lessons_Level">
+    <End Type="PetHolaKingdomModel.Level" Role="Level" Multiplicity="1" />
+    <End Type="PetHolaKingdomModel.Lesson" Role="Lesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="LessonLevel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -42,7 +42,7 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="thumbnail" Type="ntext" />
-    <Property Name="banner" Type="ntext" Nullable="false" />
+    <Property Name="banner" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="CourseCategoryId" Type="int" Nullable="false" />
     <Property Name="LessonLevel" Type="int" Nullable="false" />
   </EntityType>
@@ -105,6 +105,16 @@
     <Property Name="RoleName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="UserRole">
     <Key>
       <PropertyRef Name="id" />
@@ -131,15 +141,27 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
   </EntityType>
-  <Association Name="FK_Lessons_Course">
+  <Association Name="FK_Lessons_Courses">
     <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
-    <End Role="Lessons" Type="Self.Lessons" Multiplicity="0..1" />
+    <End Role="Lessons" Type="Self.Lessons" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Courses">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Lessons">
+        <PropertyRef Name="CourseCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lessons_Level">
+    <End Role="Level" Type="Self.Level" Multiplicity="1" />
+    <End Role="Lessons" Type="Self.Lessons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
         <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lessons">
+        <PropertyRef Name="LessonLevel" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -202,10 +224,15 @@
     <EntitySet Name="Pets" EntityType="Self.Pets" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PetsHistory" EntityType="Self.PetsHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Lessons_Course" Association="Self.FK_Lessons_Course">
+    <AssociationSet Name="FK_Lessons_Courses" Association="Self.FK_Lessons_Courses">
       <End Role="Courses" EntitySet="Courses" />
+      <End Role="Lessons" EntitySet="Lessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lessons_Level" Association="Self.FK_Lessons_Level">
+      <End Role="Level" EntitySet="Level" />
       <End Role="Lessons" EntitySet="Lessons" />
     </AssociationSet>
     <AssociationSet Name="FK_Pet_User" Association="Self.FK_Pet_User">

@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="news-events padding-lg">
+    <div class="container mb-4">
+        <ul class="row">
+            @{
+                var lstLesson = ViewBag.lstlesson;
+                foreach (var item in ViewBag.lstLesson)
+
+                {
+                    <li class="col-sm-3">
+                        <div class="inner">
+                            <figure>
+                                <a href="">
+                                    <img src="@item.ThumbNail" class="img-responsive">
+                                </a>
+                                <figcaption>
+                                    <div class="cnt-block">
+                                        <h3>@item.Name</h3>
+                                        <h3>Mức độ bài tập: @item.LevelCourse</h3>
+                                        <div class="bottom-block clearfix">
+                                            <div class="comment">
+                                                <div class="icon"><span class="icon-chat-icon"></span></div>
+                                                <a href="">Go detail</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </li>
+                    }
+                }
+            </ul>
+    </div>
+</div>
+<style>
+    .inner:hover {
+        box-shadow: 10px 10px 5px #aaaaaa !important;
+    }
+
+    .news-events figure {
+        position: initial;
+    }
+
+    .news-events ul li .cnt-block {
+        display: block;
+        padding: 10px 30px 0px 30px;
+        background: #fff;
+        position: relative;
+    }
+
+    .news-events figcaption {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+</style>
+
+

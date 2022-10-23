@@ -14,6 +14,11 @@ namespace PetHolaKingdom.Models
     
     public partial class Course
     {
+        public Course()
+        {
+            this.Lessons = new HashSet<Lesson>();
+        }
+    
         public int id { get; set; }
         public string Name { get; set; }
         public string thumbnail { get; set; }
@@ -21,6 +26,6 @@ namespace PetHolaKingdom.Models
         public string Description { get; set; }
         public System.DateTime CreatedDate { get; set; }
     
-        public virtual Lesson Lesson { get; set; }
+        public virtual ICollection<Lesson> Lessons { get; set; }
     }
 }
