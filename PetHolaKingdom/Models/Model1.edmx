@@ -4,18 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PetHolaKingdomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PetHolaKingdomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Blogs">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="blog_category_id" Type="int" Nullable="false" />
+          <Property Name="blog_category_id" Type="int" />
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="100" />
           <Property Name="brief_infor" Type="nvarchar" MaxLength="300" />
           <Property Name="description" Type="nvarchar(max)" />
-          <Property Name="thumbnail" Type="ntext" />
+          <Property Name="Image" Type="ntext" />
           <Property Name="banner" Type="ntext" Nullable="false" />
           <Property Name="added_date" Type="datetime" />
         </EntityType>
@@ -33,10 +33,12 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="thumbnail" Type="ntext" />
+          <Property Name="Image" Type="ntext" />
           <Property Name="banner" Type="ntext" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CurriculumId" Type="int" />
+          <Property Name="LevelId" Type="int" />
         </EntityType>
         <EntityType Name="Lessons">
           <Key>
@@ -46,10 +48,9 @@
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="thumbnail" Type="ntext" />
+          <Property Name="Image" Type="ntext" />
           <Property Name="banner" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="CourseCategoryId" Type="int" Nullable="false" />
-          <Property Name="LessonLevel" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="LessonsHistory">
           <Key>
@@ -73,6 +74,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Image" Type="ntext" />
         </EntityType>
         <EntityType Name="Pets">
           <Key>
@@ -146,6 +148,30 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Courses_Level">
+          <End Role="Level" Type="Self.Level" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_PetCategory">
+          <End Role="PetCategory" Type="Self.PetCategory" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PetCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="CurriculumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Lessons_Courses">
           <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
           <End Role="Lessons" Type="Self.Lessons" Multiplicity="*" />
@@ -158,27 +184,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Lessons_Level">
-          <End Role="Level" Type="Self.Level" Multiplicity="1" />
-          <End Role="Lessons" Type="Self.Lessons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Level">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Lessons">
-              <PropertyRef Name="LessonLevel" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pet_User">
+        <Association Name="FK_Pets_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Pets">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -194,27 +208,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserRole_Role">
+        <Association Name="FK_UserRole_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="UserRole">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserRole_User">
+        <Association Name="FK_UserRole_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="UserRole">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -232,15 +246,19 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Courses_Level" Association="Self.FK_Courses_Level">
+            <End Role="Level" EntitySet="Level" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_PetCategory" Association="Self.FK_Courses_PetCategory">
+            <End Role="PetCategory" EntitySet="PetCategory" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
           <AssociationSet Name="FK_Lessons_Courses" Association="Self.FK_Lessons_Courses">
             <End Role="Courses" EntitySet="Courses" />
             <End Role="Lessons" EntitySet="Lessons" />
           </AssociationSet>
-          <AssociationSet Name="FK_Lessons_Level" Association="Self.FK_Lessons_Level">
-            <End Role="Level" EntitySet="Level" />
-            <End Role="Lessons" EntitySet="Lessons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pet_User" Association="Self.FK_Pet_User">
+          <AssociationSet Name="FK_Pets_Users" Association="Self.FK_Pets_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Pets" EntitySet="Pets" />
           </AssociationSet>
@@ -248,16 +266,17 @@
             <End Role="Pets" EntitySet="Pets" />
             <End Role="PetsHistory" EntitySet="PetsHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+          <AssociationSet Name="FK_UserRole_Roles" Association="Self.FK_UserRole_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+          <AssociationSet Name="FK_UserRole_Users" Association="Self.FK_UserRole_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PetHolaKingdomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -266,12 +285,12 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="blog_category_id" Type="Int32" Nullable="false" />
+          <Property Name="blog_category_id" Type="Int32" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="brief_infor" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="banner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="added_date" Type="DateTime" Precision="3" />
         </EntityType>
@@ -283,17 +302,21 @@
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="Course">
+        <EntityType Name="Cours">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="banner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Lessons" Relationship="PetHolaKingdomModel.FK_Lessons_Courses" FromRole="Course" ToRole="Lesson" />
+          <Property Name="CurriculumId" Type="Int32" />
+          <Property Name="LevelId" Type="Int32" />
+          <NavigationProperty Name="Level" Relationship="Self.FK_Courses_Level" FromRole="Courses" ToRole="Level" />
+          <NavigationProperty Name="PetCategory" Relationship="Self.FK_Courses_PetCategory" FromRole="Courses" ToRole="PetCategory" />
+          <NavigationProperty Name="Lessons" Relationship="Self.FK_Lessons_Courses" FromRole="Courses" ToRole="Lessons" />
         </EntityType>
         <EntityType Name="Lesson">
           <Key>
@@ -303,12 +326,10 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="banner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CourseCategoryId" Type="Int32" Nullable="false" />
-          <Property Name="LessonLevel" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cours1" Relationship="PetHolaKingdomModel.FK_Lessons_Courses" FromRole="Lesson" ToRole="Course" />
-          <NavigationProperty Name="Level" Relationship="PetHolaKingdomModel.FK_Lessons_Level" FromRole="Lesson" ToRole="Level" />
+          <NavigationProperty Name="Cours" Relationship="Self.FK_Lessons_Courses" FromRole="Lessons" ToRole="Courses" />
         </EntityType>
         <EntityType Name="LessonsHistory">
           <Key>
@@ -324,7 +345,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Lessons" Relationship="PetHolaKingdomModel.FK_Lessons_Level" FromRole="Level" ToRole="Lesson" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_Level" FromRole="Level" ToRole="Courses" />
         </EntityType>
         <EntityType Name="PetCategory">
           <Key>
@@ -333,6 +354,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_PetCategory" FromRole="PetCategory" ToRole="Courses" />
         </EntityType>
         <EntityType Name="Pet">
           <Key>
@@ -347,7 +370,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Pet_User" FromRole="Pets" ToRole="Users" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Pets_Users" FromRole="Pets" ToRole="Users" />
           <NavigationProperty Name="PetsHistory" Relationship="Self.FK_PetsHistory_Pets" FromRole="Pets" ToRole="PetsHistory" />
         </EntityType>
         <EntityType Name="PetsHistory">
@@ -372,7 +395,17 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRole_Role" FromRole="Roles" ToRole="UserRole" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Roles" FromRole="Roles" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -382,8 +415,8 @@
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_UserRole_Role" FromRole="UserRole" ToRole="Roles" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserRole_User" FromRole="UserRole" ToRole="Users" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_UserRole_Roles" FromRole="UserRole" ToRole="Roles" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserRole_Users" FromRole="UserRole" ToRole="Users" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -401,18 +434,54 @@
           <Property Name="Status" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Pet" Relationship="Self.FK_Pet_User" FromRole="Users" ToRole="Pets" />
-          <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRole_User" FromRole="Users" ToRole="UserRole" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_Users" FromRole="Users" ToRole="Pets" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Users" FromRole="Users" ToRole="UserRole" />
         </EntityType>
-        <Association Name="FK_Pet_User">
+        <Association Name="FK_Courses_Level">
+          <End Role="Level" Type="Self.Level" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_PetCategory">
+          <End Role="PetCategory" Type="Self.PetCategory" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PetCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="CurriculumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lessons_Courses">
+          <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
+          <End Role="Lessons" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lessons">
+              <PropertyRef Name="CourseCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Users">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="Pets" Type="Self.Pet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Pets">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -428,34 +497,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserRole_Role">
+        <Association Name="FK_UserRole_Roles">
           <End Role="Roles" Type="Self.Role" Multiplicity="1" />
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="UserRole">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserRole_User">
+        <Association Name="FK_UserRole_Users">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="UserRole">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PetHolaKingdomEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PetHolaKingdomEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Blogs" EntityType="Self.Blog" />
           <EntitySet Name="BlogsCategories" EntityType="Self.BlogsCategory" />
-          <EntitySet Name="Courses" EntityType="PetHolaKingdomModel.Course" />
+          <EntitySet Name="Courses" EntityType="Self.Cours" />
           <EntitySet Name="Lessons" EntityType="Self.Lesson" />
           <EntitySet Name="LessonsHistories" EntityType="Self.LessonsHistory" />
           <EntitySet Name="Levels" EntityType="Self.Level" />
@@ -463,9 +532,22 @@
           <EntitySet Name="Pets" EntityType="Self.Pet" />
           <EntitySet Name="PetsHistories" EntityType="Self.PetsHistory" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_Pet_User" Association="Self.FK_Pet_User">
+          <AssociationSet Name="FK_Courses_Level" Association="Self.FK_Courses_Level">
+            <End Role="Level" EntitySet="Levels" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_PetCategory" Association="Self.FK_Courses_PetCategory">
+            <End Role="PetCategory" EntitySet="PetCategories" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lessons_Courses" Association="Self.FK_Lessons_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Lessons" EntitySet="Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Users" Association="Self.FK_Pets_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Pets" EntitySet="Pets" />
           </AssociationSet>
@@ -473,64 +555,21 @@
             <End Role="Pets" EntitySet="Pets" />
             <End Role="PetsHistory" EntitySet="PetsHistories" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+          <AssociationSet Name="FK_UserRole_Roles" Association="Self.FK_UserRole_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRole" EntitySet="UserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+          <AssociationSet Name="FK_UserRole_Users" Association="Self.FK_UserRole_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRole" EntitySet="UserRoles" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="PetHolaKingdomModel.sysdiagram" />
-          <AssociationSet Name="FK_Lessons_Courses" Association="PetHolaKingdomModel.FK_Lessons_Courses">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="Lesson" EntitySet="Lessons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lessons_Level" Association="PetHolaKingdomModel.FK_Lessons_Level">
-            <End Role="Level" EntitySet="Levels" />
-            <End Role="Lesson" EntitySet="Lessons" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <Association Name="FK_Lessons_Courses">
-          <End Type="PetHolaKingdomModel.Course" Role="Course" Multiplicity="1" />
-          <End Type="PetHolaKingdomModel.Lesson" Role="Lesson" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Lesson">
-              <PropertyRef Name="CourseCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Lessons_Level">
-          <End Type="PetHolaKingdomModel.Level" Role="Level" Multiplicity="1" />
-          <End Type="PetHolaKingdomModel.Lesson" Role="Lesson" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Level">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Lesson">
-              <PropertyRef Name="LessonLevel" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PetHolaKingdomModelStoreContainer" CdmEntityContainer="PetHolaKingdomEntities">
+        <EntityContainerMapping StorageEntityContainer="PetHolaKingdomModelStoreContainer" CdmEntityContainer="PetHolaKingdomEntities2">
           <EntitySetMapping Name="Blogs">
             <EntityTypeMapping TypeName="PetHolaKingdomModel.Blog">
               <MappingFragment StoreEntitySet="Blogs">
@@ -540,7 +579,7 @@
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="brief_infor" ColumnName="brief_infor" />
                 <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="banner" ColumnName="banner" />
                 <ScalarProperty Name="added_date" ColumnName="added_date" />
               </MappingFragment>
@@ -556,14 +595,16 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Courses">
-            <EntityTypeMapping TypeName="PetHolaKingdomModel.Course">
+            <EntityTypeMapping TypeName="PetHolaKingdomModel.Cours">
               <MappingFragment StoreEntitySet="Courses">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="banner" ColumnName="banner" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CurriculumId" ColumnName="CurriculumId" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -574,10 +615,9 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="banner" ColumnName="banner" />
                 <ScalarProperty Name="CourseCategoryId" ColumnName="CourseCategoryId" />
-                <ScalarProperty Name="LessonLevel" ColumnName="LessonLevel" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -604,6 +644,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -646,6 +687,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PetHolaKingdomModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserRoles">
             <EntityTypeMapping TypeName="PetHolaKingdomModel.UserRole">
               <MappingFragment StoreEntitySet="UserRole">
@@ -674,17 +726,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="PetHolaKingdomModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -701,7 +742,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

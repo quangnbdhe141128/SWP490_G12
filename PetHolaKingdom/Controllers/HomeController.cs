@@ -10,11 +10,11 @@ namespace PetHolaKingdom.Controllers
     public class HomeController : Controller
     {
         IBlog blog = new Blog();
-        ICourse course = new Course();
+        ICurriculum curri = new Curriculum();
         public ActionResult Index()
         {
             ViewBag.lstblog = blog.GetListBlogHome();
-            ViewBag.lstcourse=course.GetListCourseHome();
+            ViewBag.lstcurri= curri.GetListCurriculumHome();
             return View();
         }
 

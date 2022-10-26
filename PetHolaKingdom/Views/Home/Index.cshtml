@@ -71,16 +71,16 @@
 <!-- End About Section -->
 <section class="news-events padding-lg">
     <div class="container">
-        <h2>Khóa huấn luyện mới nhất</h2>
+        <h2>Đại cương huấn luyện mới nhất</h2>
         <ul class="row cs-style-3">
             @{
-                var lstCourse = ViewBag.lstcourse;
+                var lstCourse = ViewBag.lstcurri;
                 foreach (var item in lstCourse)
                 {
                     <li class="col-sm-3">
                         <div class="inner">
                             <figure>
-                                <img src="@item.ThumbNail" class="img-responsive" style="width:200px;height:200px;">
+                                <img src="@item.Image" class="img-responsive" style="width:200px;height:200px;">
                                 <figcaption>
                                     <div class="cnt-block">
                                         <a href="news.html" class="plus-icon"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
@@ -120,7 +120,7 @@
                         <li class="col-sm-3">
                             <div class="inner">
                                 <figure>
-                                    <img src="@item.ThumbNail" class="img-responsive">
+                                    <img src="@item.Image" class="img-responsive">
                                     <figcaption>
                                         <div class="cnt-block">
                                             <a href="news.html" class="plus-icon"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>

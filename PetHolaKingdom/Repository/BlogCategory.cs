@@ -9,10 +9,10 @@ namespace PetHolaKingdom.Repository
 {
     public class BlogCategory : IBlogCategory
     {
-        private PetHolaKingdomEntities entity;
+        private PetHolaKingdomEntities2 entity;
         public BlogCategory()
         {
-            entity = new PetHolaKingdomEntities();
+            entity = new PetHolaKingdomEntities2();
         }
         public IEnumerable<BlogsCategory> GetBlogCategory()
         {
