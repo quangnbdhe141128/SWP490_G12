@@ -11,11 +11,11 @@ namespace PetHolaKingdom.Repository
 {
     public class Blog : IBlog
     {
-        private PetHolaKingdomEntities entity;
+        private PetHolaKingdomEntities2 entity;
 
         public Blog()
         {
-            entity = new PetHolaKingdomEntities();
+            entity = new PetHolaKingdomEntities2();
         }
         public IEnumerable<BlogViewHome> GetListBlogHome()
         {
@@ -25,7 +25,7 @@ namespace PetHolaKingdom.Repository
                         {
                             Id = blog.id,
                             Title = blog.title,
-                            ThumbNail = blog.thumbnail,
+                            Image = blog.Image,
                             BlogCategoryName = cat.name
                             
                         };

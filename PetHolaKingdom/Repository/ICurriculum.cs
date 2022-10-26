@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PetHolaKingdom.Repository
 {
-    internal interface ICourse
+    internal interface ICurriculum
     {
-        IEnumerable<CourseViewHome> GetListCourseHome();
+        IEnumerable<CurriculumViewHome> GetListCurriculumHome();
     }
 }

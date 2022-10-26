@@ -26,7 +26,7 @@ namespace PetHolaKingdom.Helpers
         public string Description { get; set; }
         [Required]
         [StringLength(300)]
-        public string ThumbNail { get; set; }
+        public string image { get; set; }
         [Required]
         [StringLength(300)]
         public string Banner { get; set; }
@@ -41,7 +41,7 @@ namespace PetHolaKingdom.Helpers
         public int Id { get; set; }
         public string Title { get; set; }
 
-        public string ThumbNail { get; set; }
+        public string Image { get; set; }
 
         public string BlogCategoryName { get; set; }
         public DateTime Addeddate { get; set; }
