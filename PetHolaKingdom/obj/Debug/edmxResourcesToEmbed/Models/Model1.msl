@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="PetHolaKingdomModelStoreContainer" CdmEntityContainer="PetHolaKingdomEntities2">
+  <EntityContainerMapping StorageEntityContainer="PetHolaKingdomModelStoreContainer" CdmEntityContainer="PetHolaKingdomEntities">
     <EntitySetMapping Name="Blogs">
       <EntityTypeMapping TypeName="PetHolaKingdomModel.Blog">
         <MappingFragment StoreEntitySet="Blogs">
@@ -39,6 +39,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Curricula">
+      <EntityTypeMapping TypeName="PetHolaKingdomModel.Curriculum">
+        <MappingFragment StoreEntitySet="Curriculum">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Lessons">
       <EntityTypeMapping TypeName="PetHolaKingdomModel.Lesson">
         <MappingFragment StoreEntitySet="Lessons">
@@ -66,16 +76,6 @@
         <MappingFragment StoreEntitySet="Level">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PetCategories">
-      <EntityTypeMapping TypeName="PetHolaKingdomModel.PetCategory">
-        <MappingFragment StoreEntitySet="PetCategory">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

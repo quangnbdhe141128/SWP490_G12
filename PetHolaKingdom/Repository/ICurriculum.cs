@@ -1,4 +1,5 @@
 ﻿using PetHolaKingdom.Helpers;
+using PetHolaKingdom.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace PetHolaKingdom.Repository
 {
     internal interface ICurriculum
     {
+        IEnumerable<CurriculumList> GetListCurriculum(string keysearch);
         IEnumerable<CurriculumViewHome> GetListCurriculumHome();
     }
 }

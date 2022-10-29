@@ -44,6 +44,6 @@ namespace PetHolaKingdom.Helpers
         public string Image { get; set; }
 
         public string BlogCategoryName { get; set; }
-        public DateTime Addeddate { get; set; }
+        public DateTime? Addeddate { get; set; }
     }
 }

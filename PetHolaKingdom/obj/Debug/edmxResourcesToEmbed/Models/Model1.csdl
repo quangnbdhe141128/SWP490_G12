@@ -35,8 +35,18 @@
     <Property Name="CurriculumId" Type="Int32" />
     <Property Name="LevelId" Type="Int32" />
     <NavigationProperty Name="Level" Relationship="Self.FK_Courses_Level" FromRole="Courses" ToRole="Level" />
-    <NavigationProperty Name="PetCategory" Relationship="Self.FK_Courses_PetCategory" FromRole="Courses" ToRole="PetCategory" />
+    <NavigationProperty Name="Curriculum" Relationship="Self.FK_Courses_PetCategory" FromRole="Courses" ToRole="Curriculum" />
     <NavigationProperty Name="Lessons" Relationship="Self.FK_Lessons_Courses" FromRole="Courses" ToRole="Lessons" />
+  </EntityType>
+  <EntityType Name="Curriculum">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_PetCategory" FromRole="Curriculum" ToRole="Courses" />
   </EntityType>
   <EntityType Name="Lesson">
     <Key>
@@ -66,16 +76,6 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_Level" FromRole="Level" ToRole="Courses" />
-  </EntityType>
-  <EntityType Name="PetCategory">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_PetCategory" FromRole="PetCategory" ToRole="Courses" />
   </EntityType>
   <EntityType Name="Pet">
     <Key>
@@ -170,10 +170,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Courses_PetCategory">
-    <End Role="PetCategory" Type="Self.PetCategory" Multiplicity="0..1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="0..1" />
     <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PetCategory">
+      <Principal Role="Curriculum">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Courses">
@@ -241,14 +241,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="PetHolaKingdomEntities2" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="PetHolaKingdomEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Blogs" EntityType="Self.Blog" />
     <EntitySet Name="BlogsCategories" EntityType="Self.BlogsCategory" />
     <EntitySet Name="Courses" EntityType="Self.Cours" />
+    <EntitySet Name="Curricula" EntityType="Self.Curriculum" />
     <EntitySet Name="Lessons" EntityType="Self.Lesson" />
     <EntitySet Name="LessonsHistories" EntityType="Self.LessonsHistory" />
     <EntitySet Name="Levels" EntityType="Self.Level" />
-    <EntitySet Name="PetCategories" EntityType="Self.PetCategory" />
     <EntitySet Name="Pets" EntityType="Self.Pet" />
     <EntitySet Name="PetsHistories" EntityType="Self.PetsHistory" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
@@ -260,7 +260,7 @@
       <End Role="Courses" EntitySet="Courses" />
     </AssociationSet>
     <AssociationSet Name="FK_Courses_PetCategory" Association="Self.FK_Courses_PetCategory">
-      <End Role="PetCategory" EntitySet="PetCategories" />
+      <End Role="Curriculum" EntitySet="Curricula" />
       <End Role="Courses" EntitySet="Courses" />
     </AssociationSet>
     <AssociationSet Name="FK_Lessons_Courses" Association="Self.FK_Lessons_Courses">

@@ -9,11 +9,11 @@ namespace PetHolaKingdom.Repository
 {
     public class Lesson:ILesson
     {
-        private PetHolaKingdomEntities2 entity;
+        private PetHolaKingdomEntities entity;
 
         public Lesson()
         {
-            entity = new PetHolaKingdomEntities2();
+            entity = new PetHolaKingdomEntities();
         }
         public IEnumerable<LessonViewPage> GetListLessonPage()
         {
