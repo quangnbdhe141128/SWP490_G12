@@ -6,7 +6,7 @@ using System.Web;
 
 namespace PetHolaKingdom.Helpers
 {
-    public class Curriculum
+    public class CurriculumList
     {
         public int Id { get; set; }
         [Required]

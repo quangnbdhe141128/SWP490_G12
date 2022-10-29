@@ -162,3 +162,9 @@ C:\Users\quang\Desktop\SWP490_G12\PetHolaKingdom\obj\Debug\PetHolaKingdom.dll
 C:\Users\quang\Desktop\SWP490_G12\PetHolaKingdom\obj\Debug\PetHolaKingdom.pdb
 C:\Users\quang\Desktop\SWP490_G12\PetHolaKingdom\bin\EntityFramework.SqlServer.dll
 C:\Users\quang\Desktop\SWP490_G12\PetHolaKingdom\bin\EntityFramework.SqlServer.xml
+C:\Users\quang\Desktop\SWP490_G12\PetHolaKingdom\bin\PagedList.dll
+C:\Users\quang\Desktop\SWP490_G12\PetHolaKingdom\bin\PagedList.Mvc.dll
+C:\Users\quang\Desktop\SWP490_G12\PetHolaKingdom\bin\PagedList.xml
+C:\Users\quang\Desktop\SWP490_G12\PetHolaKingdom\bin\PagedList.Mvc.xml
+C:\Users\quang\Desktop\SWP490_G12\PetHolaKingdom\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\quang\Desktop\SWP490_G12\PetHolaKingdom\bin\Microsoft.AspNet.Identity.Core.xml

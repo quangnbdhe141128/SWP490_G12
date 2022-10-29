@@ -11,24 +11,25 @@ namespace PetHolaKingdom.Repository
 {
     public class Blog : IBlog
     {
-        private PetHolaKingdomEntities2 entity;
+        private PetHolaKingdomEntities entity;
 
         public Blog()
         {
-            entity = new PetHolaKingdomEntities2();
+            entity = new PetHolaKingdomEntities();
         }
         public IEnumerable<BlogViewHome> GetListBlogHome()
         {
-            var query = from blog in entity.Blogs
+            var query = (from blog in entity.Blogs
                         join cat in entity.BlogsCategories on blog.blog_category_id equals cat.id
+                        orderby blog.added_date descending
                         select new BlogViewHome
                         {
                             Id = blog.id,
                             Title = blog.title,
                             Image = blog.Image,
-                            BlogCategoryName = cat.name
-                            
-                        };
+                            BlogCategoryName = cat.name,
+                            Addeddate =blog.added_date
+                        }).Take(4).ToList();
             return query;
         }
     }

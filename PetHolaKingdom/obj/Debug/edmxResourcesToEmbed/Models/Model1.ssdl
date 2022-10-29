@@ -35,6 +35,15 @@
     <Property Name="CurriculumId" Type="int" />
     <Property Name="LevelId" Type="int" />
   </EntityType>
+  <EntityType Name="Curriculum">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Image" Type="ntext" />
+  </EntityType>
   <EntityType Name="Lessons">
     <Key>
       <PropertyRef Name="id" />
@@ -61,15 +70,6 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-  </EntityType>
-  <EntityType Name="PetCategory">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="Image" Type="ntext" />
   </EntityType>
   <EntityType Name="Pets">
     <Key>
@@ -156,10 +156,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Courses_PetCategory">
-    <End Role="PetCategory" Type="Self.PetCategory" Multiplicity="0..1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="0..1" />
     <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PetCategory">
+      <Principal Role="Curriculum">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Courses">
@@ -231,10 +231,10 @@
     <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BlogsCategory" EntityType="Self.BlogsCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Curriculum" EntityType="Self.Curriculum" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Lessons" EntityType="Self.Lessons" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LessonsHistory" EntityType="Self.LessonsHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Level" EntityType="Self.Level" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PetCategory" EntityType="Self.PetCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pets" EntityType="Self.Pets" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PetsHistory" EntityType="Self.PetsHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -246,7 +246,7 @@
       <End Role="Courses" EntitySet="Courses" />
     </AssociationSet>
     <AssociationSet Name="FK_Courses_PetCategory" Association="Self.FK_Courses_PetCategory">
-      <End Role="PetCategory" EntitySet="PetCategory" />
+      <End Role="Curriculum" EntitySet="Curriculum" />
       <End Role="Courses" EntitySet="Courses" />
     </AssociationSet>
     <AssociationSet Name="FK_Lessons_Courses" Association="Self.FK_Lessons_Courses">

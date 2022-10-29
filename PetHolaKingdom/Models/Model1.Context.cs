@@ -13,10 +13,10 @@ namespace PetHolaKingdom.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PetHolaKingdomEntities2 : DbContext
+    public partial class PetHolaKingdomEntities : DbContext
     {
-        public PetHolaKingdomEntities2()
-            : base("name=PetHolaKingdomEntities2")
+        public PetHolaKingdomEntities()
+            : base("name=PetHolaKingdomEntities")
         {
         }
     
@@ -28,10 +28,10 @@ namespace PetHolaKingdom.Models
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<BlogsCategory> BlogsCategories { get; set; }
         public virtual DbSet<Cours> Courses { get; set; }
+        public virtual DbSet<Curriculum> Curricula { get; set; }
         public virtual DbSet<Lesson> Lessons { get; set; }
         public virtual DbSet<LessonsHistory> LessonsHistories { get; set; }
         public virtual DbSet<Level> Levels { get; set; }
-        public virtual DbSet<PetCategory> PetCategories { get; set; }
         public virtual DbSet<Pet> Pets { get; set; }
         public virtual DbSet<PetsHistory> PetsHistories { get; set; }
         public virtual DbSet<Role> Roles { get; set; }

@@ -40,6 +40,15 @@
           <Property Name="CurriculumId" Type="int" />
           <Property Name="LevelId" Type="int" />
         </EntityType>
+        <EntityType Name="Curriculum">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Image" Type="ntext" />
+        </EntityType>
         <EntityType Name="Lessons">
           <Key>
             <PropertyRef Name="id" />
@@ -66,15 +75,6 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PetCategory">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="Image" Type="ntext" />
         </EntityType>
         <EntityType Name="Pets">
           <Key>
@@ -161,10 +161,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Courses_PetCategory">
-          <End Role="PetCategory" Type="Self.PetCategory" Multiplicity="0..1" />
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="0..1" />
           <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PetCategory">
+            <Principal Role="Curriculum">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Courses">
@@ -236,10 +236,10 @@
           <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BlogsCategory" EntityType="Self.BlogsCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Curriculum" EntityType="Self.Curriculum" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lessons" EntityType="Self.Lessons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LessonsHistory" EntityType="Self.LessonsHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Level" EntityType="Self.Level" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PetCategory" EntityType="Self.PetCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pets" EntityType="Self.Pets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PetsHistory" EntityType="Self.PetsHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -251,7 +251,7 @@
             <End Role="Courses" EntitySet="Courses" />
           </AssociationSet>
           <AssociationSet Name="FK_Courses_PetCategory" Association="Self.FK_Courses_PetCategory">
-            <End Role="PetCategory" EntitySet="PetCategory" />
+            <End Role="Curriculum" EntitySet="Curriculum" />
             <End Role="Courses" EntitySet="Courses" />
           </AssociationSet>
           <AssociationSet Name="FK_Lessons_Courses" Association="Self.FK_Lessons_Courses">
@@ -315,8 +315,18 @@
           <Property Name="CurriculumId" Type="Int32" />
           <Property Name="LevelId" Type="Int32" />
           <NavigationProperty Name="Level" Relationship="Self.FK_Courses_Level" FromRole="Courses" ToRole="Level" />
-          <NavigationProperty Name="PetCategory" Relationship="Self.FK_Courses_PetCategory" FromRole="Courses" ToRole="PetCategory" />
+          <NavigationProperty Name="Curriculum" Relationship="Self.FK_Courses_PetCategory" FromRole="Courses" ToRole="Curriculum" />
           <NavigationProperty Name="Lessons" Relationship="Self.FK_Lessons_Courses" FromRole="Courses" ToRole="Lessons" />
+        </EntityType>
+        <EntityType Name="Curriculum">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_PetCategory" FromRole="Curriculum" ToRole="Courses" />
         </EntityType>
         <EntityType Name="Lesson">
           <Key>
@@ -346,16 +356,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_Level" FromRole="Level" ToRole="Courses" />
-        </EntityType>
-        <EntityType Name="PetCategory">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_PetCategory" FromRole="PetCategory" ToRole="Courses" />
         </EntityType>
         <EntityType Name="Pet">
           <Key>
@@ -450,10 +450,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Courses_PetCategory">
-          <End Role="PetCategory" Type="Self.PetCategory" Multiplicity="0..1" />
+          <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="0..1" />
           <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PetCategory">
+            <Principal Role="Curriculum">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Courses">
@@ -521,14 +521,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PetHolaKingdomEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PetHolaKingdomEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Blogs" EntityType="Self.Blog" />
           <EntitySet Name="BlogsCategories" EntityType="Self.BlogsCategory" />
           <EntitySet Name="Courses" EntityType="Self.Cours" />
+          <EntitySet Name="Curricula" EntityType="Self.Curriculum" />
           <EntitySet Name="Lessons" EntityType="Self.Lesson" />
           <EntitySet Name="LessonsHistories" EntityType="Self.LessonsHistory" />
           <EntitySet Name="Levels" EntityType="Self.Level" />
-          <EntitySet Name="PetCategories" EntityType="Self.PetCategory" />
           <EntitySet Name="Pets" EntityType="Self.Pet" />
           <EntitySet Name="PetsHistories" EntityType="Self.PetsHistory" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
@@ -540,7 +540,7 @@
             <End Role="Courses" EntitySet="Courses" />
           </AssociationSet>
           <AssociationSet Name="FK_Courses_PetCategory" Association="Self.FK_Courses_PetCategory">
-            <End Role="PetCategory" EntitySet="PetCategories" />
+            <End Role="Curriculum" EntitySet="Curricula" />
             <End Role="Courses" EntitySet="Courses" />
           </AssociationSet>
           <AssociationSet Name="FK_Lessons_Courses" Association="Self.FK_Lessons_Courses">
@@ -569,7 +569,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PetHolaKingdomModelStoreContainer" CdmEntityContainer="PetHolaKingdomEntities2">
+        <EntityContainerMapping StorageEntityContainer="PetHolaKingdomModelStoreContainer" CdmEntityContainer="PetHolaKingdomEntities">
           <EntitySetMapping Name="Blogs">
             <EntityTypeMapping TypeName="PetHolaKingdomModel.Blog">
               <MappingFragment StoreEntitySet="Blogs">
@@ -608,6 +608,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Curricula">
+            <EntityTypeMapping TypeName="PetHolaKingdomModel.Curriculum">
+              <MappingFragment StoreEntitySet="Curriculum">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Lessons">
             <EntityTypeMapping TypeName="PetHolaKingdomModel.Lesson">
               <MappingFragment StoreEntitySet="Lessons">
@@ -635,16 +645,6 @@
               <MappingFragment StoreEntitySet="Level">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PetCategories">
-            <EntityTypeMapping TypeName="PetHolaKingdomModel.PetCategory">
-              <MappingFragment StoreEntitySet="PetCategory">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="11b961537bfc4b4ba289f2ee7e6e6833" Name="Diagram1">
+      <Diagram DiagramId="3ae3d3c4592447f386763c66a4b90708" Name="Diagram1">
         <EntityTypeShape EntityType="PetHolaKingdomModel.Blog" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PetHolaKingdomModel.BlogsCategory" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PetHolaKingdomModel.Cours" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.Curriculum" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PetHolaKingdomModel.Lesson" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PetHolaKingdomModel.LessonsHistory" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.Level" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.PetCategory" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.Level" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PetHolaKingdomModel.Pet" Width="1.5" PointX="5" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PetHolaKingdomModel.PetsHistory" Width="1.5" PointX="7.25" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PetHolaKingdomModel.Role" Width="1.5" PointX="2.75" PointY="12.25" IsExpanded="true" />
