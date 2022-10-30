@@ -33,8 +33,6 @@
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CurriculumId" Type="Int32" />
-    <Property Name="LevelId" Type="Int32" />
-    <NavigationProperty Name="Level" Relationship="Self.FK_Courses_Level" FromRole="Courses" ToRole="Level" />
     <NavigationProperty Name="Curriculum" Relationship="Self.FK_Courses_PetCategory" FromRole="Courses" ToRole="Curriculum" />
     <NavigationProperty Name="Lessons" Relationship="Self.FK_Lessons_Courses" FromRole="Courses" ToRole="Lessons" />
   </EntityType>
@@ -59,7 +57,9 @@
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="banner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="CourseCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="LevelId" Type="Int32" />
     <NavigationProperty Name="Cours" Relationship="Self.FK_Lessons_Courses" FromRole="Lessons" ToRole="Courses" />
+    <NavigationProperty Name="Level" Relationship="Self.FK_Lessons_Level" FromRole="Lessons" ToRole="Level" />
   </EntityType>
   <EntityType Name="LessonsHistory">
     <Key>
@@ -75,7 +75,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_Level" FromRole="Level" ToRole="Courses" />
+    <NavigationProperty Name="Lessons" Relationship="Self.FK_Lessons_Level" FromRole="Level" ToRole="Lessons" />
   </EntityType>
   <EntityType Name="Pet">
     <Key>
@@ -157,18 +157,6 @@
     <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_Users" FromRole="Users" ToRole="Pets" />
     <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Users" FromRole="Users" ToRole="UserRole" />
   </EntityType>
-  <Association Name="FK_Courses_Level">
-    <End Role="Level" Type="Self.Level" Multiplicity="0..1" />
-    <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Level">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Courses">
-        <PropertyRef Name="LevelId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Courses_PetCategory">
     <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="0..1" />
     <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
@@ -190,6 +178,18 @@
       </Principal>
       <Dependent Role="Lessons">
         <PropertyRef Name="CourseCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lessons_Level">
+    <End Role="Level" Type="Self.Level" Multiplicity="0..1" />
+    <End Role="Lessons" Type="Self.Lesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lessons">
+        <PropertyRef Name="LevelId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -255,16 +255,16 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
     <EntitySet Name="Users" EntityType="Self.User" />
-    <AssociationSet Name="FK_Courses_Level" Association="Self.FK_Courses_Level">
-      <End Role="Level" EntitySet="Levels" />
-      <End Role="Courses" EntitySet="Courses" />
-    </AssociationSet>
     <AssociationSet Name="FK_Courses_PetCategory" Association="Self.FK_Courses_PetCategory">
       <End Role="Curriculum" EntitySet="Curricula" />
       <End Role="Courses" EntitySet="Courses" />
     </AssociationSet>
     <AssociationSet Name="FK_Lessons_Courses" Association="Self.FK_Lessons_Courses">
       <End Role="Courses" EntitySet="Courses" />
+      <End Role="Lessons" EntitySet="Lessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lessons_Level" Association="Self.FK_Lessons_Level">
+      <End Role="Level" EntitySet="Levels" />
       <End Role="Lessons" EntitySet="Lessons" />
     </AssociationSet>
     <AssociationSet Name="FK_Pets_Users" Association="Self.FK_Pets_Users">

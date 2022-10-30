@@ -17,13 +17,13 @@ namespace PetHolaKingdom.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Level()
         {
-            this.Courses = new HashSet<Cours>();
+            this.Lessons = new HashSet<Lesson>();
         }
     
         public int id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cours> Courses { get; set; }
+        public virtual ICollection<Lesson> Lessons { get; set; }
     }
 }

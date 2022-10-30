@@ -111,6 +111,17 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <style>
+        .dropdown-menu a {
+            padding: 10px;
+            width: 100%;
+            display: inline-block;
+        }
+
+            .dropdown-menu a:hover {
+                background: #e6e3e3;
+            }
+    </style>
 
 </body>
 </html>

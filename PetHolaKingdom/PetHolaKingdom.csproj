@@ -218,7 +218,9 @@
     <Compile Include="Repository\ICourse.cs" />
     <Compile Include="Repository\ICurriculum.cs" />
     <Compile Include="Repository\ILesson.cs" />
+    <Compile Include="Repository\IUser.cs" />
     <Compile Include="Repository\Lesson.cs" />
+    <Compile Include="Repository\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\assetshome\bootstrap\css\bootstrap.min.css" />

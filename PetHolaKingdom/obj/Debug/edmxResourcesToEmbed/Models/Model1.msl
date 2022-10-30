@@ -35,7 +35,6 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="CurriculumId" ColumnName="CurriculumId" />
-          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -59,6 +58,7 @@
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="banner" ColumnName="banner" />
           <ScalarProperty Name="CourseCategoryId" ColumnName="CourseCategoryId" />
+          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
