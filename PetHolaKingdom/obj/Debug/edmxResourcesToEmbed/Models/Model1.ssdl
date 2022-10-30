@@ -33,7 +33,6 @@
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="CurriculumId" Type="int" />
-    <Property Name="LevelId" Type="int" />
   </EntityType>
   <EntityType Name="Curriculum">
     <Key>
@@ -55,6 +54,7 @@
     <Property Name="Image" Type="ntext" />
     <Property Name="banner" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="CourseCategoryId" Type="int" Nullable="false" />
+    <Property Name="LevelId" Type="int" />
   </EntityType>
   <EntityType Name="LessonsHistory">
     <Key>
@@ -143,18 +143,6 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
   </EntityType>
-  <Association Name="FK_Courses_Level">
-    <End Role="Level" Type="Self.Level" Multiplicity="0..1" />
-    <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Level">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Courses">
-        <PropertyRef Name="LevelId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Courses_PetCategory">
     <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="0..1" />
     <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
@@ -176,6 +164,18 @@
       </Principal>
       <Dependent Role="Lessons">
         <PropertyRef Name="CourseCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lessons_Level">
+    <End Role="Level" Type="Self.Level" Multiplicity="0..1" />
+    <End Role="Lessons" Type="Self.Lessons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lessons">
+        <PropertyRef Name="LevelId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -241,16 +241,16 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Courses_Level" Association="Self.FK_Courses_Level">
-      <End Role="Level" EntitySet="Level" />
-      <End Role="Courses" EntitySet="Courses" />
-    </AssociationSet>
     <AssociationSet Name="FK_Courses_PetCategory" Association="Self.FK_Courses_PetCategory">
       <End Role="Curriculum" EntitySet="Curriculum" />
       <End Role="Courses" EntitySet="Courses" />
     </AssociationSet>
     <AssociationSet Name="FK_Lessons_Courses" Association="Self.FK_Lessons_Courses">
       <End Role="Courses" EntitySet="Courses" />
+      <End Role="Lessons" EntitySet="Lessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lessons_Level" Association="Self.FK_Lessons_Level">
+      <End Role="Level" EntitySet="Level" />
       <End Role="Lessons" EntitySet="Lessons" />
     </AssociationSet>
     <AssociationSet Name="FK_Pets_Users" Association="Self.FK_Pets_Users">

@@ -21,7 +21,9 @@ namespace PetHolaKingdom.Models
         public string Image { get; set; }
         public string banner { get; set; }
         public int CourseCategoryId { get; set; }
+        public Nullable<int> LevelId { get; set; }
     
         public virtual Cours Cours { get; set; }
+        public virtual Level Level { get; set; }
     }
 }
