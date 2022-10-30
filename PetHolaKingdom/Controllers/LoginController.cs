@@ -43,7 +43,7 @@ namespace PetHolaKingdom.Controllers
                 {
                     TempData["LoginErrorMessage"] = "Thông tin đăng nhập chưa chính xác";
                 }
-                TempData["LoginErrorMessage"] = "Thông tin đăng nhập chưa chính xác";
+                
             }
             
             return View(user2);

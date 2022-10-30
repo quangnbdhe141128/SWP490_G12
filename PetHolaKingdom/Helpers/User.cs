@@ -38,5 +38,16 @@ namespace PetHolaKingdom.Helpers
             public string Password { get; set; }
             public int Role { get; set; }
         }
-    
+    public class UserProfile
+    {
+        public int User_id { get; set; }
+        [Required]
+        public string Full_Name { get; set; }
+        public string PhoneNo { get; set; }
+        [EmailAddressAttribute]
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public int Role { get; set; }
+    }
+
 }
