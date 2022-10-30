@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetHolaKingdom.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace PetHolaKingdom.Repository
     {
         IEnumerable<Models.User> GetUser();
         Models.User Login(String phone, String pass);
+        Models.User Register(UserRegister user);
         string MD5Gende(string pass);
     }
 }

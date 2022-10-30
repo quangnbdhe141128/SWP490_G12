@@ -31,8 +31,8 @@ namespace PetHolaKingdom.Models
         public string PhoneNo { get; set; }
         public string Email { get; set; }
         public string Status { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public System.DateTime LastModifiedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> LastModifiedDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pet> Pets { get; set; }

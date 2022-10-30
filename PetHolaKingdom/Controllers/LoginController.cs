@@ -24,7 +24,7 @@ namespace PetHolaKingdom.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Index( UserLogin user2)
+        public ActionResult Index(UserLogin user2)
         {
 
             if (ModelState.IsValid)
@@ -33,27 +33,20 @@ namespace PetHolaKingdom.Controllers
                 var u = user.Login(user2.PhoneNo, user.MD5Gende(user2.Password));
                 if (u != null)
                 {
-                  FormsAuthentication.SetAuthCookie(u.PhoneNo, false);
-                    
-                   
-                        return RedirectToAction("Index", "Home");
-                  
+                    return RedirectToAction("Index", "Home");
+
                 }// u = null
                 else
                 {
                     TempData["LoginErrorMessage"] = "Thông tin đăng nhập chưa chính xác";
                 }
-                
+                TempData["LoginErrorMessage"] = "Thông tin đăng nhập chưa chính xác";
             }
-            
+
             return View(user2);
         }
 
-        public ActionResult SignOut()
-        {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
-        }
+
         [AllowAnonymous]
         public ActionResult AccessDenied()
         {

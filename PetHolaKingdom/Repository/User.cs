@@ -25,6 +25,20 @@ namespace PetHolaKingdom.Repository
         {
             return entity.Users.Where(x => x.PhoneNo == phone && x.Password == pass).FirstOrDefault();
         }
+        public Models.User Register(UserRegister user)
+        {
+            Models.User user1 =new Models.User();
+            user1.FirstName = user.FirstName;
+            user1.MiddleName = user.MiddleName;
+            user1.LastName = user.LastName;
+            user1.Email = user.Email;
+            user1.PhoneNo=user.PhoneNo;           
+            user1.Password = MD5Gende(user.Password);
+            entity.Users.Add(user1);
+            entity.SaveChanges();
+            return user1;
+        }
+        
         public string MD5Gende(string pass)
         {
             MD5 mh = MD5.Create();
