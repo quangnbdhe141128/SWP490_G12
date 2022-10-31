@@ -131,17 +131,17 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="MiddleName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="LastName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="DisplayName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="200" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="200" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="200" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="200" />
+    <Property Name="Password" Type="nvarchar" MaxLength="200" />
     <Property Name="ImageProfile" Type="nvarchar" MaxLength="500" />
-    <Property Name="PhoneNo" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Status" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="PhoneNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" />
+    <Property Name="Status" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedDate" Type="datetime" />
   </EntityType>
   <Association Name="FK_Courses_PetCategory">
     <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="0..1" />
