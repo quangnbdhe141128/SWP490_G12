@@ -27,6 +27,7 @@ namespace PetHolaKingdom.Models
         public string LastName { get; set; }
         public string DisplayName { get; set; }
         public string Password { get; set; }
+        public string Address { get; set; }
         public string ImageProfile { get; set; }
         public string PhoneNo { get; set; }
         public string Email { get; set; }

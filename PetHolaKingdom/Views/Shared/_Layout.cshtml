@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -39,15 +40,28 @@
                             <li> <span>Email</span> <a href="mailto:info@edumart.org">info@edumart.org</a> </li>
                             <li> <span>Toll Free</span> 1800 000 0000 </li>
                         </ul>
+                        @if (!String.IsNullOrEmpty(User.Identity.Name))
+                        {
+
+                            <span style="margin-top:20px">Hello!</span>
+                            <div class="btn-group">
+                                <a><span class="fa fa-github"></span><b></b> </a>
+                                <a href="/Profile/Index" type="button" class="dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @User.Identity.Name <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/Profile/Index">Account Management</a>
+
+                                    <a href="@Url.Action("SignOut", "Login")">Logout <span class="icon-more-icon"></span></a>
+                                </div>
+                            </div>
 
 
-                        <span style="margin-top:20px">Hello!</span>
-                        <span class="fa fa-github"></span><span class="fa fa-caret-down"></span>
-
-
-
-                        <a href="/Login" class="login">Member Login <span class="icon-more-icon"></span></a>
-
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index", "Login")" class="login">Member Login <span class="icon-more-icon"></span></a>
+                        }
                     </div>
                 </div>
             </div>
@@ -109,7 +123,7 @@
     <!-- Custom JS -->
     <script src="~/Assets/js/jshome/custom.js"></script>
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    
     @RenderSection("scripts", required: false)
     <style>
         .dropdown-menu a {

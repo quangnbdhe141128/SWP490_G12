@@ -13,10 +13,6 @@ namespace PetHolaKingdom.Helpers
         [StringLength(11)]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Mobile only accept number")]
         public string PhoneNo { get; set; }
-
-        [Required]
-        [EmailAddressAttribute]
-        public string Email { get; set; }
         [Required]
         public string Password { get; set; }
     }
@@ -49,10 +45,11 @@ namespace PetHolaKingdom.Helpers
     {
         public int User_id { get; set; }
         [Required]
-        public string Full_Name { get; set; }
+        public string LastName { get; set; }
         public string PhoneNo { get; set; }
         [EmailAddressAttribute]
         public string Email { get; set; }
+        public string Address { get; set; }
         public string Password { get; set; }
         public int Role { get; set; }
     }

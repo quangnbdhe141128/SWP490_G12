@@ -38,7 +38,38 @@ namespace PetHolaKingdom.Repository
             entity.SaveChanges();
             return user1;
         }
-        
+        public UserProfile GetProfileById(int id)
+        {
+            var user_id = new UserProfile();
+            user_id = (from u in entity.Users
+                       where u.id == id
+                       select new UserProfile
+                       {
+                           User_id = u.id,
+                           LastName = u.LastName,
+                           PhoneNo = u.PhoneNo,
+                           Address = u.Address,
+                           Email = u.Email,
+                       }).FirstOrDefault();
+            return user_id;
+        }
+        public UserProfile GetProfileByPhoneNo(string phoneNo)
+        {
+            var user_phone = new UserProfile();
+            user_phone = (from u in entity.Users
+                       where u.PhoneNo == phoneNo
+                       select new UserProfile
+                       {
+                           User_id = u.id,
+                           LastName = u.LastName,
+                           PhoneNo = u.PhoneNo,
+                           Address = u.Address,
+                           Email = u.Email,
+                           Password = phoneNo
+                       }).FirstOrDefault();
+            return user_phone;
+        }
+
         public string MD5Gende(string pass)
         {
             MD5 mh = MD5.Create();

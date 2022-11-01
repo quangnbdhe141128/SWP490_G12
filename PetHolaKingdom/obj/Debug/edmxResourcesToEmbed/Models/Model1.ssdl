@@ -107,16 +107,6 @@
     <Property Name="RoleName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="UserRole">
     <Key>
       <PropertyRef Name="id" />
@@ -136,6 +126,7 @@
     <Property Name="LastName" Type="nvarchar" MaxLength="200" />
     <Property Name="DisplayName" Type="nvarchar" MaxLength="200" />
     <Property Name="Password" Type="nvarchar" MaxLength="200" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
     <Property Name="ImageProfile" Type="nvarchar" MaxLength="500" />
     <Property Name="PhoneNo" Type="nvarchar" MaxLength="20" />
     <Property Name="Email" Type="nvarchar" MaxLength="200" />
@@ -238,7 +229,6 @@
     <EntitySet Name="Pets" EntityType="Self.Pets" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PetsHistory" EntityType="Self.PetsHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Courses_PetCategory" Association="Self.FK_Courses_PetCategory">
