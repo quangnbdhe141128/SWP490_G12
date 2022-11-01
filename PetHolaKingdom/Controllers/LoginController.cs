@@ -33,19 +33,27 @@ namespace PetHolaKingdom.Controllers
                 var u = user.Login(user2.PhoneNo, user.MD5Gende(user2.Password));
                 if (u != null)
                 {
-                    return RedirectToAction("Index", "Home");
-
-                }// u = null
-                else
-                {
-                    TempData["LoginErrorMessage"] = "Thông tin đăng nhập chưa chính xác";
+                    FormsAuthentication.SetAuthCookie(u.PhoneNo, false);
+                    var checkRole = user.GetProfileByPhoneNo(user2.PhoneNo);
+                    if (u != null)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        TempData["LoginErrorMessage"] = "Thông tin đăng nhập chưa chính xác";
+                    }              
                 }
                 TempData["LoginErrorMessage"] = "Thông tin đăng nhập chưa chính xác";
+                
             }
-
             return View(user2);
         }
-
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
 
         [AllowAnonymous]
         public ActionResult AccessDenied()

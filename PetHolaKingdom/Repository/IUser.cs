@@ -12,6 +12,8 @@ namespace PetHolaKingdom.Repository
         IEnumerable<Models.User> GetUser();
         Models.User Login(String phone, String pass);
         Models.User Register(UserRegister user);
+        UserProfile GetProfileById(int id);
+        UserProfile GetProfileByPhoneNo(string phoneNo);
         string MD5Gende(string pass);
     }
 }

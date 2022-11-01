@@ -117,16 +117,6 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Roles" FromRole="Roles" ToRole="UserRole" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="UserRole">
     <Key>
       <PropertyRef Name="id" />
@@ -148,6 +138,7 @@
     <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="DisplayName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="ImageProfile" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="PhoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -252,7 +243,6 @@
     <EntitySet Name="Pets" EntityType="Self.Pet" />
     <EntitySet Name="PetsHistories" EntityType="Self.PetsHistory" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <AssociationSet Name="FK_Courses_PetCategory" Association="Self.FK_Courses_PetCategory">
