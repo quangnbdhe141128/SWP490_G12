@@ -12,20 +12,31 @@ namespace PetHolaKingdom.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BlogsCategory
+    public partial class Staff
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BlogsCategory()
+        public Staff()
         {
-            this.Blogs = new HashSet<Blog>();
+            this.UserRoles = new HashSet<UserRole>();
         }
     
         public int id { get; set; }
-        public string name { get; set; }
-        public System.DateTime CreatedDate { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string DisplayName { get; set; }
+        public string Password { get; set; }
+        public string Address { get; set; }
+        public string ImageProfile { get; set; }
+        public string PhoneNo { get; set; }
+        public string Email { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> LastModifiedDate { get; set; }
+        public Nullable<int> PetClinicId { get; set; }
         public Nullable<bool> Status { get; set; }
     
+        public virtual PetClinic PetClinic { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

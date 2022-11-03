@@ -4,26 +4,42 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2d3c46f30b7d429680164df1b02e55dc" Name="Diagram1">
-        <EntityTypeShape EntityType="PetHolaKingdomModel.Blog" Width="1.5" PointX="7.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.BlogsCategory" Width="1.5" PointX="9.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.Cours" Width="1.5" PointX="5" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.Curriculum" Width="1.5" PointX="2.75" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.Lesson" Width="1.5" PointX="7.25" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.LessonsHistory" Width="1.5" PointX="9.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.Level" Width="1.5" PointX="5" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.Pet" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.PetsHistory" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.Role" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.UserRole" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PetHolaKingdomModel.User" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+      <Diagram DiagramId="4b0a494249344b8da1b951246035a568" Name="Diagram1">
+        <EntityTypeShape EntityType="PetHolaKingdomModel.Blog" Width="1.5" PointX="13" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.BlogsCategory" Width="1.5" PointX="10.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.Cours" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.Curriculum" Width="1.5" PointX="1.5" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.LessonDetail" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.LessonLearning" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.LessonRegister" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.Lesson" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.LessonsHistory" Width="1.5" PointX="2.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.Level" Width="1.5" PointX="1.5" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.PetClinic" Width="1.5" PointX="5.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.Pet" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.PetsHistory" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.Review" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.Role" Width="1.5" PointX="8" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.Staff" Width="1.5" PointX="8" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.sysdiagram" Width="1.5" PointX="10.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.UserRole" Width="1.5" PointX="10.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetHolaKingdomModel.User" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_Blogs_BlogsCategory" ManuallyRouted="false" />
         <AssociationConnector Association="PetHolaKingdomModel.FK_Courses_PetCategory" ManuallyRouted="false" />
         <AssociationConnector Association="PetHolaKingdomModel.FK_Lessons_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_LessonDetails_Lessons" ManuallyRouted="false" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_LessonLearning_LessonDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_Review_LessonDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_LessonLearning_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_LessonRegister_Lessons" ManuallyRouted="false" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_LessonRegister_Users" ManuallyRouted="false" />
         <AssociationConnector Association="PetHolaKingdomModel.FK_Lessons_Level" ManuallyRouted="false" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_Staff_PetClinic" ManuallyRouted="false" />
         <AssociationConnector Association="PetHolaKingdomModel.FK_Pets_Users" ManuallyRouted="false" />
         <AssociationConnector Association="PetHolaKingdomModel.FK_PetsHistory_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_Review_Users" ManuallyRouted="false" />
         <AssociationConnector Association="PetHolaKingdomModel.FK_UserRole_Roles" ManuallyRouted="false" />
-        <AssociationConnector Association="PetHolaKingdomModel.FK_UserRole_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="PetHolaKingdomModel.FK_UserRole_Staff" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

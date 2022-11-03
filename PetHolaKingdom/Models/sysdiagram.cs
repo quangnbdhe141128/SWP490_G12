@@ -12,11 +12,12 @@ namespace PetHolaKingdom.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class LessonsHistory
+    public partial class sysdiagram
     {
-        public int id { get; set; }
-        public string Action { get; set; }
-        public string Action_by { get; set; }
-        public System.DateTime UpdateDate { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -13,6 +13,8 @@
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="banner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="added_date" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Boolean" />
+    <NavigationProperty Name="BlogsCategory" Relationship="Self.FK_Blogs_BlogsCategory" FromRole="Blogs" ToRole="BlogsCategory" />
   </EntityType>
   <EntityType Name="BlogsCategory">
     <Key>
@@ -21,6 +23,8 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Blogs" Relationship="Self.FK_Blogs_BlogsCategory" FromRole="BlogsCategory" ToRole="Blogs" />
   </EntityType>
   <EntityType Name="Cours">
     <Key>
@@ -29,10 +33,10 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="banner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CurriculumId" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
     <NavigationProperty Name="Curriculum" Relationship="Self.FK_Courses_PetCategory" FromRole="Courses" ToRole="Curriculum" />
     <NavigationProperty Name="Lessons" Relationship="Self.FK_Lessons_Courses" FromRole="Courses" ToRole="Lessons" />
   </EntityType>
@@ -44,7 +48,47 @@
     <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
     <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_PetCategory" FromRole="Curriculum" ToRole="Courses" />
+  </EntityType>
+  <EntityType Name="LessonDetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="LessonId" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonDetails_Lessons" FromRole="LessonDetails" ToRole="Lessons" />
+    <NavigationProperty Name="LessonLearnings" Relationship="Self.FK_LessonLearning_LessonDetails" FromRole="LessonDetails" ToRole="LessonLearning" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_LessonDetails" FromRole="LessonDetails" ToRole="Review" />
+  </EntityType>
+  <EntityType Name="LessonLearning">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="LessonDetailId" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="LessonDetail" Relationship="Self.FK_LessonLearning_LessonDetails" FromRole="LessonLearning" ToRole="LessonDetails" />
+    <NavigationProperty Name="User" Relationship="Self.FK_LessonLearning_Users" FromRole="LessonLearning" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="LessonRegister">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="LessonId" Type="Int32" />
+    <Property Name="isactive" Type="Boolean" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonRegister_Lessons" FromRole="LessonRegister" ToRole="Lessons" />
+    <NavigationProperty Name="User" Relationship="Self.FK_LessonRegister_Users" FromRole="LessonRegister" ToRole="Users" />
   </EntityType>
   <EntityType Name="Lesson">
     <Key>
@@ -55,10 +99,12 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="banner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="CourseCategoryId" Type="Int32" Nullable="false" />
     <Property Name="LevelId" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
     <NavigationProperty Name="Cours" Relationship="Self.FK_Lessons_Courses" FromRole="Lessons" ToRole="Courses" />
+    <NavigationProperty Name="LessonDetails" Relationship="Self.FK_LessonDetails_Lessons" FromRole="Lessons" ToRole="LessonDetails" />
+    <NavigationProperty Name="LessonRegisters" Relationship="Self.FK_LessonRegister_Lessons" FromRole="Lessons" ToRole="LessonRegister" />
     <NavigationProperty Name="Level" Relationship="Self.FK_Lessons_Level" FromRole="Lessons" ToRole="Level" />
   </EntityType>
   <EntityType Name="LessonsHistory">
@@ -66,8 +112,9 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Action" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Action_by" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="Level">
     <Key>
@@ -75,7 +122,17 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Boolean" />
     <NavigationProperty Name="Lessons" Relationship="Self.FK_Lessons_Level" FromRole="Level" ToRole="Lessons" />
+  </EntityType>
+  <EntityType Name="PetClinic">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Staffs" Relationship="Self.FK_Staff_PetClinic" FromRole="PetClinic" ToRole="Staff" />
   </EntityType>
   <EntityType Name="Pet">
     <Key>
@@ -90,6 +147,7 @@
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Boolean" />
     <NavigationProperty Name="User" Relationship="Self.FK_Pets_Users" FromRole="Pets" ToRole="Users" />
     <NavigationProperty Name="PetsHistory" Relationship="Self.FK_PetsHistory_Pets" FromRole="Pets" ToRole="PetsHistory" />
   </EntityType>
@@ -108,6 +166,19 @@
     <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Pet" Relationship="Self.FK_PetsHistory_Pets" FromRole="PetsHistory" ToRole="Pets" />
   </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="LessonDetailId" Type="Int32" />
+    <Property Name="Content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Create_date" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="LessonDetail" Relationship="Self.FK_Review_LessonDetails" FromRole="Review" ToRole="LessonDetails" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Review_Users" FromRole="Review" ToRole="Users" />
+  </EntityType>
   <EntityType Name="Role">
     <Key>
       <PropertyRef Name="id" />
@@ -115,7 +186,39 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RoleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Boolean" />
     <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Roles" FromRole="Roles" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DisplayName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ImageProfile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="PetClinicId" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="PetClinic" Relationship="Self.FK_Staff_PetClinic" FromRole="Staff" ToRole="PetClinic" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Staff" FromRole="Staff" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="UserRole">
     <Key>
@@ -125,8 +228,9 @@
     <Property Name="RoleId" Type="Int32" Nullable="false" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Boolean" />
     <NavigationProperty Name="Role" Relationship="Self.FK_UserRole_Roles" FromRole="UserRole" ToRole="Roles" />
-    <NavigationProperty Name="User" Relationship="Self.FK_UserRole_Users" FromRole="UserRole" ToRole="Users" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK_UserRole_Staff" FromRole="UserRole" ToRole="Staff" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -139,15 +243,29 @@
     <Property Name="DisplayName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="ImageProfile" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ImageProfile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="PhoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Status" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="LessonLearnings" Relationship="Self.FK_LessonLearning_Users" FromRole="Users" ToRole="LessonLearning" />
+    <NavigationProperty Name="LessonRegisters" Relationship="Self.FK_LessonRegister_Users" FromRole="Users" ToRole="LessonRegister" />
     <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_Users" FromRole="Users" ToRole="Pets" />
-    <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Users" FromRole="Users" ToRole="UserRole" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_Users" FromRole="Users" ToRole="Review" />
   </EntityType>
+  <Association Name="FK_Blogs_BlogsCategory">
+    <End Role="BlogsCategory" Type="Self.BlogsCategory" Multiplicity="0..1" />
+    <End Role="Blogs" Type="Self.Blog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BlogsCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Blogs">
+        <PropertyRef Name="blog_category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Courses_PetCategory">
     <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="0..1" />
     <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
@@ -172,6 +290,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_LessonDetails_Lessons">
+    <End Role="Lessons" Type="Self.Lesson" Multiplicity="0..1" />
+    <End Role="LessonDetails" Type="Self.LessonDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lessons">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LessonDetails">
+        <PropertyRef Name="LessonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LessonLearning_LessonDetails">
+    <End Role="LessonDetails" Type="Self.LessonDetail" Multiplicity="0..1" />
+    <End Role="LessonLearning" Type="Self.LessonLearning" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LessonDetails">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LessonLearning">
+        <PropertyRef Name="LessonDetailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review_LessonDetails">
+    <End Role="LessonDetails" Type="Self.LessonDetail" Multiplicity="0..1" />
+    <End Role="Review" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LessonDetails">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="LessonDetailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LessonLearning_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="LessonLearning" Type="Self.LessonLearning" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LessonLearning">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LessonRegister_Lessons">
+    <End Role="Lessons" Type="Self.Lesson" Multiplicity="0..1" />
+    <End Role="LessonRegister" Type="Self.LessonRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lessons">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LessonRegister">
+        <PropertyRef Name="LessonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LessonRegister_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="LessonRegister" Type="Self.LessonRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LessonRegister">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Lessons_Level">
     <End Role="Level" Type="Self.Level" Multiplicity="0..1" />
     <End Role="Lessons" Type="Self.Lesson" Multiplicity="*" />
@@ -181,6 +371,18 @@
       </Principal>
       <Dependent Role="Lessons">
         <PropertyRef Name="LevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_PetClinic">
+    <End Role="PetClinic" Type="Self.PetClinic" Multiplicity="0..1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PetClinic">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="PetClinicId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -208,6 +410,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Review_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Review" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UserRole_Roles">
     <End Role="Roles" Type="Self.Role" Multiplicity="1" />
     <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
@@ -220,11 +434,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserRole_Users">
-    <End Role="Users" Type="Self.User" Multiplicity="1" />
+  <Association Name="FK_UserRole_Staff">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
     <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Users">
+      <Principal Role="Staff">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="UserRole">
@@ -237,14 +451,25 @@
     <EntitySet Name="BlogsCategories" EntityType="Self.BlogsCategory" />
     <EntitySet Name="Courses" EntityType="Self.Cours" />
     <EntitySet Name="Curricula" EntityType="Self.Curriculum" />
+    <EntitySet Name="LessonDetails" EntityType="Self.LessonDetail" />
+    <EntitySet Name="LessonLearnings" EntityType="Self.LessonLearning" />
+    <EntitySet Name="LessonRegisters" EntityType="Self.LessonRegister" />
     <EntitySet Name="Lessons" EntityType="Self.Lesson" />
     <EntitySet Name="LessonsHistories" EntityType="Self.LessonsHistory" />
     <EntitySet Name="Levels" EntityType="Self.Level" />
+    <EntitySet Name="PetClinics" EntityType="Self.PetClinic" />
     <EntitySet Name="Pets" EntityType="Self.Pet" />
     <EntitySet Name="PetsHistories" EntityType="Self.PetsHistory" />
+    <EntitySet Name="Reviews" EntityType="Self.Review" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
     <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Blogs_BlogsCategory" Association="Self.FK_Blogs_BlogsCategory">
+      <End Role="BlogsCategory" EntitySet="BlogsCategories" />
+      <End Role="Blogs" EntitySet="Blogs" />
+    </AssociationSet>
     <AssociationSet Name="FK_Courses_PetCategory" Association="Self.FK_Courses_PetCategory">
       <End Role="Curriculum" EntitySet="Curricula" />
       <End Role="Courses" EntitySet="Courses" />
@@ -253,9 +478,37 @@
       <End Role="Courses" EntitySet="Courses" />
       <End Role="Lessons" EntitySet="Lessons" />
     </AssociationSet>
+    <AssociationSet Name="FK_LessonDetails_Lessons" Association="Self.FK_LessonDetails_Lessons">
+      <End Role="Lessons" EntitySet="Lessons" />
+      <End Role="LessonDetails" EntitySet="LessonDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LessonLearning_LessonDetails" Association="Self.FK_LessonLearning_LessonDetails">
+      <End Role="LessonDetails" EntitySet="LessonDetails" />
+      <End Role="LessonLearning" EntitySet="LessonLearnings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review_LessonDetails" Association="Self.FK_Review_LessonDetails">
+      <End Role="LessonDetails" EntitySet="LessonDetails" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LessonLearning_Users" Association="Self.FK_LessonLearning_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="LessonLearning" EntitySet="LessonLearnings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LessonRegister_Lessons" Association="Self.FK_LessonRegister_Lessons">
+      <End Role="Lessons" EntitySet="Lessons" />
+      <End Role="LessonRegister" EntitySet="LessonRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LessonRegister_Users" Association="Self.FK_LessonRegister_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="LessonRegister" EntitySet="LessonRegisters" />
+    </AssociationSet>
     <AssociationSet Name="FK_Lessons_Level" Association="Self.FK_Lessons_Level">
       <End Role="Level" EntitySet="Levels" />
       <End Role="Lessons" EntitySet="Lessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_PetClinic" Association="Self.FK_Staff_PetClinic">
+      <End Role="PetClinic" EntitySet="PetClinics" />
+      <End Role="Staff" EntitySet="Staffs" />
     </AssociationSet>
     <AssociationSet Name="FK_Pets_Users" Association="Self.FK_Pets_Users">
       <End Role="Users" EntitySet="Users" />
@@ -265,12 +518,16 @@
       <End Role="Pets" EntitySet="Pets" />
       <End Role="PetsHistory" EntitySet="PetsHistories" />
     </AssociationSet>
+    <AssociationSet Name="FK_Review_Users" Association="Self.FK_Review_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
     <AssociationSet Name="FK_UserRole_Roles" Association="Self.FK_UserRole_Roles">
       <End Role="Roles" EntitySet="Roles" />
       <End Role="UserRole" EntitySet="UserRoles" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserRole_Users" Association="Self.FK_UserRole_Users">
-      <End Role="Users" EntitySet="Users" />
+    <AssociationSet Name="FK_UserRole_Staff" Association="Self.FK_UserRole_Staff">
+      <End Role="Staff" EntitySet="Staffs" />
       <End Role="UserRole" EntitySet="UserRoles" />
     </AssociationSet>
   </EntityContainer>

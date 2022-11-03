@@ -23,5 +23,8 @@ namespace PetHolaKingdom.Models
         public string Image { get; set; }
         public string banner { get; set; }
         public Nullable<System.DateTime> added_date { get; set; }
+        public Nullable<bool> status { get; set; }
+    
+        public virtual BlogsCategory BlogsCategory { get; set; }
     }
 }
