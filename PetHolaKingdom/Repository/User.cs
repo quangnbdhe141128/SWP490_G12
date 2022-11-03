@@ -46,6 +46,8 @@ namespace PetHolaKingdom.Repository
                        select new UserProfile
                        {
                            User_id = u.id,
+                           FirstName = u.FirstName,
+                           MiddleName = u.MiddleName,
                            LastName = u.LastName,
                            PhoneNo = u.PhoneNo,
                            Address = u.Address,
@@ -61,15 +63,66 @@ namespace PetHolaKingdom.Repository
                        select new UserProfile
                        {
                            User_id = u.id,
+                           FirstName = u.FirstName,
+                           MiddleName = u.MiddleName,
                            LastName = u.LastName,
                            PhoneNo = u.PhoneNo,
                            Address = u.Address,
                            Email = u.Email,
-                           Password = phoneNo
+                           Password = u.Password,
                        }).FirstOrDefault();
             return user_phone;
         }
+        public bool UpdateProfile(UserProfile profile)
+        {
+            var pro = entity.Users.Where(x => x.id == profile.User_id).FirstOrDefault();
+            if (pro != null)
+            {
+                try
+                {
+                    pro.FirstName = profile.FirstName;
+                    pro.MiddleName = profile.MiddleName;
+                    pro.LastName = profile.LastName;
+                    pro.Email = profile.Email;
+                    pro.Address = profile.Address;
+                    entity.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
 
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public bool ChangePassword(ChangePassword changePass)
+        {
+            var change = entity.Users.Where(x => x.id == changePass.User_id).FirstOrDefault();
+            if (change != null)
+            {
+                try
+                {
+                    change.Password = MD5Gende(changePass.newPassword);
+                    entity.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+        }
         public string MD5Gende(string pass)
         {
             MD5 mh = MD5.Create();

@@ -45,6 +45,10 @@ namespace PetHolaKingdom.Helpers
     {
         public int User_id { get; set; }
         [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string MiddleName { get; set; }
+        [Required]
         public string LastName { get; set; }
         public string PhoneNo { get; set; }
         [EmailAddressAttribute]
@@ -53,5 +57,19 @@ namespace PetHolaKingdom.Helpers
         public string Password { get; set; }
         public int Role { get; set; }
     }
+    public class ChangePassword
+    {
+        public int? User_id { get; set; }
+        public string FirstName { get; set; }       
+        public string MiddleName { get; set; }     
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+        public string PhoneNo { get; set; }
+        [Required]
+        public string oldPassword { get; set; }
 
+        [Required]
+        public string newPassword { get; set; }
+    }
 }

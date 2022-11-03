@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Assets/css/csshome/reset.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/Assets/css/csshome/fonts.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="~/Assets/css/assetshome/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="~/Assets/css/assetshome/select2/css/select2.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/Assets/css/assetshome/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Magnific Popup -->
+    <link href="~/Assets/css/assetshome/magnific-popup/css/magnific-popup.css" rel="stylesheet">
+    <!-- Iconmoon -->
+    <link href="~/Assets/css/assetshome/iconmoon/css/iconmoon.css" rel="stylesheet">
+    <!-- Owl Carousel -->
+    <link href="~/Assets/css/assetshome/owl-carousel/css/owl.carousel.min.css" rel="stylesheet">
+    <!-- Animate -->
+    <link href="~/Assets/css/csshome/animate.css" rel="stylesheet">
+    <!-- Custom Style -->
+    <link href="~/Assets/css/csshome/custom.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <!-- Start Header Middle -->
+        <div class="container header-middle">
+            <div class="row">
+                <span class="col-xs-6 col-sm-3"><a href="/"><img style=" max-width: 70% !important;" src="~/Assets/images/logo-pet.PNG" class="img-responsive" alt=""></a></span>
+                <div class="col-xs-6 col-sm-3"></div>
+                <div class="col-xs-6 col-sm-9">
+                    <div class="contact clearfix">
+                        <ul class="hidden-xs">
+                            <li> <span>Email</span> <a href="mailto:info@edumart.org">info@edumart.org</a> </li>
+                            <li> <span>Toll Free</span> 1800 000 0000 </li>
+                        </ul>
+                        @if (!String.IsNullOrEmpty(User.Identity.Name))
+                        {
+
+                            <span style="margin-top:20px">Hello!</span>
+                            <div class="btn-group">
+                                <a><span class="fa fa-github"></span><b></b> </a>
+                                <a href="/Profile/Index" type="button" class="dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @User.Identity.Name <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/Profile/Index">Account Management</a>
+
+                                    <a href="@Url.Action("SignOut", "Login")">Logout <span class="icon-more-icon"></span></a>
+                                </div>
+                            </div>
+
+
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index", "Login")" class="login">Member Login <span class="icon-more-icon"></span></a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Header Middle -->
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar">
+
+                    <ul class="nav navbar-nav">
+                        <li> <a href="/">Home</a></li>
+                        <li> <a href="about.html">About</a></li>
+                        <li> <a href="@Url.Action("Index", "Curriculum")">Đại cương</a></li>
+
+                        <li> <a href="/Home/Contact">Tin tức</a></li>
+
+                        <li> <a href="/Home/Contact">Contact</a></li>
+
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navigation -->
+    </header>
+    <div class="container pt-3">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                        </div>
+                        @{
+                            var user = ViewBag.User;
+                            if (user != null)
+                            {
+                                <h3 class="profile-username text-center" style="margin: 20px 0px;">@user.LastName</h3>
+
+
+                                <ul class="list-group list-group-unbordered mb-3">
+                                    <li class="list-group-item">
+                                        <b>Email</b>
+                                        <a class="float-right">
+                                            @{
+                                                if (user.Email != null)
+                                                {
+                                                    @user.Email
+                                                }
+                                                else
+                                                {
+                                                    <span>Chưa đăng kí</span>
+                                                }
+                                            }
+
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>PhoneNo</b> <a class="float-right">@user.PhoneNo</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Address</b> <a class="float-right">
+                                            @{
+                                                if (user.Address != null)
+                                                {
+                                                    @user.Address
+                                                }
+                                                else
+                                                {
+                                                    <span>Chưa đăng kí</span>
+                                                }
+                                            }
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                        }
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-3 col-xl-4">
+                        <div class="card mb-3 widget-content bg-midnight-bloom">
+                            <a href="/Profile/ChangePassword" class="widget-content-wrapper text-white">
+                                <div class="widget-content-left">
+                                    <div class="widget-heading">Change Password</div>
+                                    <div class="widget-subheading">Last year expenses</div>
+                                </div>
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xl-4">
+                        <div class="card mb-3 widget-content bg-arielle-smile">
+                            <a href="/Profile/Index" class="widget-content-wrapper text-white">
+                                <div class="widget-content-left">
+                                    <div class="widget-heading">Change Information</div>
+                                    <div class="widget-subheading">Total Clients Profit</div>
+                                </div>
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xl-4">
+                        <div class="card mb-3 widget-content bg-grow-early">
+                            <a href="/Profile/LessonRegister" class="widget-content-wrapper text-white">
+                                <div class="widget-content-left">
+                                    <div class="widget-heading">Lesson register</div>
+                                    <div class="widget-subheading">People Interested</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="d-xl-none d-lg-block col-md-3 col-xl-4">
+                        <div class="card mb-3 widget-content bg-premium-dark">
+                            <a href="/Profile/PetManagement" class="widget-content-wrapper text-white">
+                                <div class="widget-content-left">
+                                    <div class="widget-heading">Pet Management</div>
+                                    <div class="widget-subheading">Revenue streams</div>
+                                </div>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @if (TempData["Notify"] != null)
+                {
+                    <div class="alert alert-success" id="notify">
+                        @TempData["Notify"]
+                    </div>
+                }
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger" id="notify">
+                        @TempData["Error"]
+                    </div>
+                }
+                @RenderBody()
+            </div>
+            <hr />
+            @*<footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>*@
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="~/Assets/js/jshome/jquery.min.js"></script>
+    <!-- Bootsrap JS -->
+    <script src="~/Assets/css/assetshome/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Select2 JS -->
+    <script src="~/Assets/css/assetshome/select2/js/select2.min.js"></script>
+    <!-- Match Height JS -->
+    <script src="~/Assets/css/assetshome/matchHeight/js/matchHeight-min.js"></script>
+    <!-- Bxslider JS -->
+    <script src="~/Assets/css/assetshome/bxslider/js/bxslider.min.js"></script>
+    <!-- Waypoints JS -->
+    <script src="~/Assets/css/assetshome/waypoints/js/waypoints.min.js"></script>
+    <!-- Counter Up JS -->
+    <script src="~/Assets/css/assetshome/counterup/js/counterup.min.js"></script>
+    <!-- Magnific Popup JS -->
+    @*<script src="../assetshome/magnific-popup/js/magnific-popup.min.js"></script>*@
+    <!-- Owl Carousal JS -->
+    <script src="~/Assets/css/assetshome/owl-carousel/js/owl.carousel.min.js"></script>
+    <!-- Modernizr JS -->
+    <script src="~/Assets/js/jshome/modernizr.custom.js"></script>
+    <!-- Custom JS -->
+    <script src="~/Assets/js/jshome/custom.js"></script>
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+    <style>
+        .dropdown-menu a {
+            padding: 10px;
+            width: 100%;
+            display: inline-block;
+        }
+
+            .dropdown-menu a:hover {
+                background: #e6e3e3;
+            }
+
+        .pt-3 {
+            padding-top: 30px;
+        }
+
+        .card {
+            box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+            border-width: 0;
+            transition: all .2s;
+        }
+
+        .bg-midnight-bloom {
+            background-image: linear-gradient(-20deg,#2b5876 0%,#4e4376 100%) !important;
+        }
+
+        .card.mb-3 {
+            margin-bottom: 30px !important;
+        }
+
+        .bg-arielle-smile {
+            background-image: radial-gradient(circle 248px at center,#16d9e3 0%,#30c7ec 47%,#46aef7 100%) !important;
+        }
+
+        .bg-grow-early {
+            background-image: linear-gradient(to top,#0ba360 0%,#3cba92 100%) !important;
+        }
+
+        .bg-premium-dark {
+            background-image: linear-gradient(to right,#434343 0%,black 100%) !important;
+        }
+
+        .widget-content .widget-content-wrapper {
+            display: flex;
+            flex: 1;
+            position: relative;
+            align-items: center;
+        }
+
+        .text-white {
+            color: #fff !important;
+        }
+
+        .widget-content .widget-content-left .widget-heading {
+            opacity: .8;
+            font-weight: 700;
+        }
+
+        .widget-content .widget-content-left .widget-subheading {
+            opacity: .5;
+        }
+
+        .widget-content {
+            padding: 1rem;
+            flex-direction: row;
+            align-items: center;
+        }
+    </style>
+</body>
+</html>
+

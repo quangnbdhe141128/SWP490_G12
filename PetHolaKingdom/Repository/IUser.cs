@@ -14,6 +14,8 @@ namespace PetHolaKingdom.Repository
         Models.User Register(UserRegister user);
         UserProfile GetProfileById(int id);
         UserProfile GetProfileByPhoneNo(string phoneNo);
+        bool UpdateProfile(UserProfile profile);
+        bool ChangePassword(ChangePassword changePass);
         string MD5Gende(string pass);
     }
 }
