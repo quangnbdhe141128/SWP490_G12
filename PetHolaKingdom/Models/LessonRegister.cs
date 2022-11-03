@@ -12,20 +12,15 @@ namespace PetHolaKingdom.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Pet
+    public partial class LessonRegister
     {
         public int id { get; set; }
-        public string Description { get; set; }
-        public System.DateTime DateOfBirth { get; set; }
-        public double Weight { get; set; }
-        public string Gender { get; set; }
-        public int PetCategoryId { get; set; }
-        public int UserId { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<System.DateTime> LastModifiedDate { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<int> LessonId { get; set; }
+        public Nullable<bool> isactive { get; set; }
         public Nullable<bool> Status { get; set; }
     
+        public virtual Lesson Lesson { get; set; }
         public virtual User User { get; set; }
-        public virtual PetsHistory PetsHistory { get; set; }
     }
 }

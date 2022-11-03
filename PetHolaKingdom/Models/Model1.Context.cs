@@ -29,12 +29,19 @@ namespace PetHolaKingdom.Models
         public virtual DbSet<BlogsCategory> BlogsCategories { get; set; }
         public virtual DbSet<Cours> Courses { get; set; }
         public virtual DbSet<Curriculum> Curricula { get; set; }
+        public virtual DbSet<LessonDetail> LessonDetails { get; set; }
+        public virtual DbSet<LessonLearning> LessonLearnings { get; set; }
+        public virtual DbSet<LessonRegister> LessonRegisters { get; set; }
         public virtual DbSet<Lesson> Lessons { get; set; }
         public virtual DbSet<LessonsHistory> LessonsHistories { get; set; }
         public virtual DbSet<Level> Levels { get; set; }
+        public virtual DbSet<PetClinic> PetClinics { get; set; }
         public virtual DbSet<Pet> Pets { get; set; }
         public virtual DbSet<PetsHistory> PetsHistories { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Staff> Staffs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

@@ -14,16 +14,27 @@ namespace PetHolaKingdom.Models
     
     public partial class Lesson
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Lesson()
+        {
+            this.LessonDetails = new HashSet<LessonDetail>();
+            this.LessonRegisters = new HashSet<LessonRegister>();
+        }
+    
         public int id { get; set; }
         public string Name { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
-        public string banner { get; set; }
         public int CourseCategoryId { get; set; }
         public Nullable<int> LevelId { get; set; }
+        public Nullable<bool> Status { get; set; }
     
         public virtual Cours Cours { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LessonDetail> LessonDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LessonRegister> LessonRegisters { get; set; }
         public virtual Level Level { get; set; }
     }
 }
