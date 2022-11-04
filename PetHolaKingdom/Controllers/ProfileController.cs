@@ -58,7 +58,7 @@ namespace PetHolaKingdom.Controllers
                     TempData["Error"] = "OldPassword is incorrect";
                     return View(changePass);
                 }
-
+                changePass.User_id=change.User_id;
                 if (user.ChangePassword(changePass))
                 {
                     TempData["Notify"] = "Update sucess";
