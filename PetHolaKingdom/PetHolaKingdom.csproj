@@ -309,6 +309,8 @@
     <Content Include="Assets\images\fpt-logo.png" />
     <Content Include="Assets\images\fpt2.png" />
     <Content Include="Assets\images\google_logo.png" />
+    <Content Include="Assets\images\icon\icon_footer.png" />
+    <Content Include="Assets\images\icon\PHK_ICON_IMAGE.png" />
     <Content Include="Assets\images\imageshome\404-img.png" />
     <Content Include="Assets\images\imageshome\about-bg.jpg" />
     <Content Include="Assets\images\imageshome\about-video-bg.jpg" />
