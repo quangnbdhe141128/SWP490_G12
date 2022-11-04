@@ -442,9 +442,14 @@
     <Content Include="Assets\images\move-top.png" />
     <Content Include="Assets\images\no-img.png" />
     <Content Include="Assets\images\panasonic.png" />
+    <Content Include="Assets\images\Phk_icon.png" />
+    <Content Include="Assets\images\PHK_ICON_IMAGE.png" />
     <Content Include="Assets\images\picture.png" />
     <Content Include="Assets\images\pngtree-cute-orange-pet-shop-promotion-banner-image_194564.jpg" />
     <Content Include="Assets\images\services.jpg" />
+    <Content Include="Assets\images\slider\slider_1.png" />
+    <Content Include="Assets\images\slider\slider_2.png" />
+    <Content Include="Assets\images\slider\slider_3.png" />
     <Content Include="Assets\images\users\1-old.jpg" />
     <Content Include="Assets\images\users\1.jpg" />
     <Content Include="Assets\images\users\1.png" />

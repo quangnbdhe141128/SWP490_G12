@@ -104,42 +104,50 @@
                             var user = ViewBag.User;
                             if (user != null)
                             {
-                                <h3 class="profile-username text-center" style="margin: 20px 0px;">@user.LastName</h3>
+                                <h3 class="profile-username text-center" style="margin: 20px 0px;">@user.FirstName @user.MiddleName @user.LastName </h3>
 
 
                                 <ul class="list-group list-group-unbordered mb-3">
                                     <li class="list-group-item">
                                         <b>Email</b>
-                                        <a class="float-right">
-                                            @{
-                                                if (user.Email != null)
-                                                {
-                                                    @user.Email
-                                                }
-                                                else
-                                                {
-                                                    <span>Chưa đăng kí</span>
-                                                }
-                                            }
 
-                                        </a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>PhoneNo</b> <a class="float-right">@user.PhoneNo</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Address</b> <a class="float-right">
-                                            @{
-                                                if (user.Address != null)
-                                                {
-                                                    @user.Address
-                                                }
-                                                else
-                                                {
-                                                    <span>Chưa đăng kí</span>
-                                                }
+                                        @{
+                                            if (user.Email != null)
+                                            {
+                                                <a class="float-right">
+                                                    : @user.Email
+                                                </a>
                                             }
-                                        </a>
+                                            else
+                                            {
+                                                <a class="float-right">
+                                                    <span>: Chưa đăng kí</span>
+                                                </a>
+                                            }
+                                        }
+
+
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>PhoneNo</b> <a class="float-right"> : @user.PhoneNo</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Address</b>
+                                        @{
+                                            if (user.Address != null)
+                                            {
+                                                <a class="float-right">
+                                                   : @user.Address
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="float-right">
+                                                    <span>: Chưa đăng kí</span>
+                                                </a>
+                                            }
+                                        }
+
                                     </li>
                                 </ul>
                             }
