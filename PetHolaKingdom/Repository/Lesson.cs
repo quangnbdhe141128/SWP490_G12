@@ -15,24 +15,11 @@ namespace PetHolaKingdom.Repository
         {
             entity = new PetHolaKingdomEntities();
         }
-        public IEnumerable<LessonViewPage> GetListLessonPage()
+        public List<Models.Lesson> GetLessonPageList(int courseId, string keysearch)
         {
-            /*var text = from lesson in entity.Lessons
-                       join cat in entity.Levels on lesson.LessonLevel equals cat.id
-                       select lesson;*/
-            var query = from lesson in entity.Lessons
-            
-                        select new LessonViewPage
-                        {
-                            Id = lesson.id,
-                            Name=lesson.Name,
-                            CreatedDate=lesson.CreatedDate,
-                            Description=lesson.Description,
-                            Image=lesson.Image,
-                            Banner=lesson.Image
-
-                        };
-            return query;
+            PetHolaKingdomEntities entities = new PetHolaKingdomEntities();
+            var list = entities.Lessons.Where(o => o.CourseCategoryId == courseId && (o.Name.StartsWith(keysearch) || keysearch == "")).ToList();
+            return list;
         }
     }
 }

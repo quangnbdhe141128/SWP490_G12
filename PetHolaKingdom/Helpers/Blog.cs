@@ -32,6 +32,7 @@ namespace PetHolaKingdom.Helpers
         public string Banner { get; set; }
 
         public DateTime Addeddate { get; set; }
+        public bool Status { get; set; }
 
 
         public IEnumerable<SelectListItem> Category_List { get; set; }
@@ -45,5 +46,6 @@ namespace PetHolaKingdom.Helpers
 
         public string BlogCategoryName { get; set; }
         public DateTime? Addeddate { get; set; }
+        public bool Status { get; set; }
     }
 }

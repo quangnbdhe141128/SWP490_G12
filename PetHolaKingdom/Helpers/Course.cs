@@ -15,6 +15,7 @@ namespace PetHolaKingdom.Helpers
         public DateTime CreatedDate { get; set; }    
         public int CurriculumId { get; set; }
         public string LevelCourse { get; set; }
-  
+        public bool Status { get; set; }
+
     }
 }

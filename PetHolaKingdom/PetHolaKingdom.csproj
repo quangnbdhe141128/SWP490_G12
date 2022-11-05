@@ -145,7 +145,6 @@
     <Compile Include="Controllers\CoursePageController.cs" />
     <Compile Include="Controllers\CurriculumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LessonListPageController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -157,6 +156,7 @@
     <Compile Include="Helpers\Curriculum.cs" />
     <Compile Include="Helpers\Course.cs" />
     <Compile Include="Helpers\Lesson.cs" />
+    <Compile Include="Helpers\LessonDetail.cs" />
     <Compile Include="Helpers\Level.cs" />
     <Compile Include="Helpers\User.cs" />
     <Compile Include="Models\Blog.cs">
@@ -688,7 +688,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\LessonListPage\Index.cshtml" />
     <Content Include="Views\Curriculum\Index.cshtml" />
     <Content Include="Views\CoursePage\Index.cshtml" />
     <Content Include="Views\CoursePage\Detail.cshtml" />
