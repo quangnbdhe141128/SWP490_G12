@@ -14,6 +14,8 @@ namespace PetHolaKingdom.Helpers
         public string Name { get; set; }
         public string Image { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        public bool Status { get; set; }
     }
     public class CurriculumViewHome
     {
@@ -22,5 +24,6 @@ namespace PetHolaKingdom.Helpers
         public string Name { get; set; }
         public string Image { get; set; }
         public DateTime CreatedDate { get; set; }
+        public bool Status { get; set; }
     }
 }

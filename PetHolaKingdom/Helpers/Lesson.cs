@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace PetHolaKingdom.Helpers
 {
@@ -12,8 +13,12 @@ namespace PetHolaKingdom.Helpers
         public DateTime CreatedDate { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
-        public string Banner { get; set; }
-        public int CourseId { get; set; }
-       
+        public int? CourseCategoryId { get; set; }
+        public int LevelId { get; set; }
+        public string LevelInfo { get; set; }
+        public bool Status { get; set; }
+
+        public IEnumerable<SelectListItem> Category_List { get; set; }
+
     }
 }
