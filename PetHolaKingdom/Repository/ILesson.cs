@@ -9,6 +9,7 @@ namespace PetHolaKingdom.Repository
 {
     internal interface ILesson
     {
-        List<Models.Lesson> GetLessonPageList(int courseId, string keysearch);
+     
+        List<LessonViewPage> GetLessonPageList(int courseId, string keysearch);
     }
 }

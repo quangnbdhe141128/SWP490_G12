@@ -14,7 +14,7 @@ namespace PetHolaKingdom.Helpers
         public string Description { get; set; }
         public string Image { get; set; }
         public int? CourseCategoryId { get; set; }
-        public int LevelId { get; set; }
+        public int? LevelId { get; set; }
         public string LevelInfo { get; set; }
         public bool Status { get; set; }
 

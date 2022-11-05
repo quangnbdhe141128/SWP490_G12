@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model IPagedList<PetHolaKingdom.Models.Lesson>
+@model IPagedList<PetHolaKingdom.Helpers.LessonViewPage>
 @using PagedList.Mvc;
 @using PagedList;
 @using Microsoft.AspNet.Identity;
@@ -43,10 +43,46 @@
                         <figcaption>
                             <div class="cnt-block">
                                 <h3>@item.Name</h3>
+                                @{if (item.LevelId == 1)
+                                    {
+                                        <a class="text-success">@item.LevelInfo</a>
+                                    }
+                                    else if (item.LevelId == 2)
+                                    {
+                                        <a class="text-warning">@item.LevelInfo</a>
+                                    }
+                                    else if (item.LevelId == 3)
+                                    {
+                                        <a class="text-danger">@item.LevelInfo</a>
+                                    }
+                                    else if (item.LevelId == 4)
+                                    {
+                                        <a class="text-dark">@item.LevelInfo</a>
+                                    }
+
+                                }
+
+
                                 <div class="bottom-block clearfix">
                                     <div class="comment">
                                         <div class="icon"><span class="icon-chat-icon"></span></div>
-                                        <a href="">Go detail lesson</a>
+                                        @{
+
+                                            if (String.IsNullOrEmpty(User.Identity.Name))
+                                            {
+
+                                                <span>Đăng nhập để xem chi tiết khóa học</span>
+                                                <br/>
+                                                <a href="/Login/Index">
+                                                    Đăng nhập ngay
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="">Chưa đăng ký</a>
+                                            }
+                                        }
+
                                     </div>
                                 </div>
                             </div>
@@ -81,6 +117,7 @@
         top: 0;
         left: 0;
     }
+
     h3 {
         text-transform: unset;
     }
