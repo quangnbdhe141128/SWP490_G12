@@ -142,6 +142,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Admin\CourseManageController.cs" />
     <Compile Include="Controllers\CoursePageController.cs" />
     <Compile Include="Controllers\CurriculumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -697,6 +698,10 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\ChangePassword.cshtml" />
     <Content Include="Views\Shared\_Layout_user.cshtml" />
+    <Content Include="Views\Shared\_Layout_cms.cshtml" />
+    <Content Include="Views\CourseManage\Index.cshtml" />
+    <Content Include="Views\CourseManage\Add.cshtml" />
+    <Content Include="Views\CourseManage\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

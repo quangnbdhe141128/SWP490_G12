@@ -10,6 +10,15 @@ namespace PetHolaKingdom.Repository
     {
         private PetHolaKingdomEntities entity;
 
+        public Course()
+        {
+            entity = new PetHolaKingdomEntities();
+        }
+        public IEnumerable<Cours> GetCourse()
+        {
+            return entity.Courses.ToList();
+        }
+
         public List<Cours> GetCoursePageList(int catId, string keysearch)
         {
             PetHolaKingdomEntities entities = new PetHolaKingdomEntities();
@@ -23,6 +32,8 @@ namespace PetHolaKingdom.Repository
             return obj;
 
         }
+
+        
 
     }
 }
