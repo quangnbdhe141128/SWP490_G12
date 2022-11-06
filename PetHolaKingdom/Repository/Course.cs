@@ -1,4 +1,5 @@
-﻿using PetHolaKingdom.Models;
+﻿using PetHolaKingdom.Helpers;
+using PetHolaKingdom.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +33,38 @@ namespace PetHolaKingdom.Repository
             return obj;
 
         }
+        public List<Cours> GetCourseList(string keysearch)
+        {
+            PetHolaKingdomEntities entities = new PetHolaKingdomEntities();
+            var list = entities.Courses.Where(o => o.Name.StartsWith(keysearch) || keysearch == "").ToList();
+            return list;
+        }
+ /*       public bool EditCourse(CourseList list, int id)
+        {
+            var edit = entity.Courses.Where(x => x.id == id).FirstOrDefault();
+            if (edit != null)
+            {
+                try
+                {
+                    edit.Name=list.Name;
+                    edit.Status=list.Status;
+                    edit.Description=list.Description;
+                    edit.Image=list.Image;
+                    entity.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
 
-        
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
 
+        }
+ */
     }
 }

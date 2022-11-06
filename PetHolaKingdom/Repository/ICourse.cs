@@ -12,5 +12,6 @@ namespace PetHolaKingdom.Repository
         IEnumerable<Cours> GetCourse();
         List<Cours> GetCoursePageList(int catId, string keysearch);
         Cours GetCourseDetail(int Id);
+        List<Cours> GetCourseList(string keysearch);
     }
 }

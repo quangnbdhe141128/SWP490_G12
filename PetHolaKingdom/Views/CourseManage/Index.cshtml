@@ -1,10 +1,7 @@
-﻿
-@model IPagedList<PetHolaKingdom.Models.Cours>
+﻿@model IPagedList<PetHolaKingdom.Models.Cours>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout_cms.cshtml";
-
-
 }
 @using PagedList.Mvc;
 @using PagedList;
@@ -20,12 +17,12 @@
             <div class="col-md-12">
                 <div class="card-body">
                     <div class="head-block">
-                        <h1>Course List</h1>
+                        <h1>CourseCategory List</h1>
                     </div>
                     <div class="">
                         @using (Html.BeginForm("Index", "CourseManage", FormMethod.Get))
                         {
-                            <input type="text" name="query" value="@Request.QueryString[" query"]" placeholder="Nhập từ khoá tìm kiếm..." style=" width: 50%; margin-bottom: 20px;height:26px;" />
+                            <input type="text" name="keysearch" value="@ViewBag.KeySearch" placeholder="Nhập từ khoá tìm kiếm..." style=" width: 50%; margin-bottom: 20px;height:26px;" />
                             <input class="btn btn-primary" type="submit" name="submit" value="Tìm kiêm" />
                         }
                         <a class="btn btn-success" href="@Url.Action("Add", "CourseManage")">Thêm mới</a>
@@ -61,13 +58,13 @@
 
                                         <tr>
                                             <td> @count</td>
-                                            <td>                                            
+                                            <td>
                                                 @Html.DisplayFor(modelItem => item.Name)
                                             </td>
 
                                             <td>
                                                 @{
-                                                    if (@item.Status == true)
+                                                    if (item.Status == true)
                                                     {
                                                         <input checked="checked" class="check-box" type="checkbox">
                                                     }
@@ -82,7 +79,7 @@
                                             </td>
                                             <td>
                                                 <a class="btn btn-primary" href="@Url.Action("Edit", "CourseManage",new {id=item.id})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Chỉnh sửa</a>
-                                                <a class="btn btn-warning" href="@Url.Action("Delete", "CourseManage",new {id=item.id})" onclick="return confirm('Bạn có chắc chắn muốn xoá bản ghi này?');"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Xoá</a>
+                                                <a class="btn btn-warning" href="" onclick="return confirm('Bạn có chắc chắn muốn xoá bản ghi này?');"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Xoá</a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -94,7 +91,7 @@
 
                         </table>
 
-                        @Html.PagedListPager(Model, page => Url.Action("Index", "CourseManage", new { page, query = Request.QueryString["query"] }))
+                        @Html.PagedListPager(Model, page => Url.Action("Index", "CourseManage", new { page, @keysearch = @ViewBag.KeySearch }))
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -164,6 +161,3 @@
         });
     </script>
 }
-
-
-
