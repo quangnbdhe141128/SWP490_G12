@@ -26,7 +26,7 @@ namespace PetHolaKingdom.Models
         public System.DateTime CreatedDate { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
-        public int CourseCategoryId { get; set; }
+        public Nullable<int> CourseCategoryId { get; set; }
         public Nullable<int> LevelId { get; set; }
         public Nullable<bool> Status { get; set; }
     

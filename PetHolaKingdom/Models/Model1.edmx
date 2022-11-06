@@ -39,7 +39,7 @@
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CurriculumId" Type="int" />
-          <Property Name="Status" Type="bit" />
+          <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Curriculum">
           <Key>
@@ -92,7 +92,7 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Image" Type="ntext" />
-          <Property Name="CourseCategoryId" Type="int" Nullable="false" />
+          <Property Name="CourseCategoryId" Type="int" />
           <Property Name="LevelId" Type="int" />
           <Property Name="Status" Type="bit" />
         </EntityType>
@@ -312,7 +312,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Lessons_Courses">
-          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
           <End Role="Lessons" Type="Self.Lessons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Courses">
@@ -545,7 +545,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CurriculumId" Type="Int32" />
-          <Property Name="Status" Type="Boolean" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Curriculum" Relationship="Self.FK_Courses_PetCategory" FromRole="Courses" ToRole="Curriculum" />
           <NavigationProperty Name="Lessons" Relationship="Self.FK_Lessons_Courses" FromRole="Courses" ToRole="Lessons" />
         </EntityType>
@@ -608,7 +608,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CourseCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="CourseCategoryId" Type="Int32" />
           <Property Name="LevelId" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="Cours" Relationship="Self.FK_Lessons_Courses" FromRole="Lessons" ToRole="Courses" />
@@ -788,7 +788,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Lessons_Courses">
-          <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Cours" Multiplicity="0..1" />
           <End Role="Lessons" Type="Self.Lesson" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Courses">

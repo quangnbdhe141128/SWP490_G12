@@ -9,7 +9,9 @@ namespace PetHolaKingdom.Repository
 {
     internal interface ICourse
     {
+        IEnumerable<Cours> GetCourse();
         List<Cours> GetCoursePageList(int catId, string keysearch);
         Cours GetCourseDetail(int Id);
+        List<Cours> GetCourseList(string keysearch);
     }
 }
