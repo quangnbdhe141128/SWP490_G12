@@ -39,32 +39,80 @@ namespace PetHolaKingdom.Repository
             var list = entities.Courses.Where(o => o.Name.StartsWith(keysearch) || keysearch == "").ToList();
             return list;
         }
- /*       public bool EditCourse(CourseList list, int id)
+        public CourseList GetEditCourseById(int id)
         {
-            var edit = entity.Courses.Where(x => x.id == id).FirstOrDefault();
-            if (edit != null)
+            return entity.Courses.Select(x => new CourseList
             {
-                try
-                {
-                    edit.Name=list.Name;
-                    edit.Status=list.Status;
-                    edit.Description=list.Description;
-                    edit.Image=list.Image;
-                    entity.SaveChanges();
-                    return true;
-                }
-                catch (Exception)
-                {
+                Id = x.id,
+                Name = x.Name,
+                Description = x.Description,
+                Image = x.Image
+            }).Where(x => x.Id == id).FirstOrDefault();
+        }
+        public bool EditCourse(CourseList list)
+        {
+            var edit = entity.Courses.Where(x => x.id == list.Id).FirstOrDefault();
 
-                    return false;
-                }
-            }
-            else
+            try
             {
+                if (list.Image != null)
+                {
+                    edit.Image = list.Image;
+                }
+                edit.Name = list.Name;
+                edit.Status = list.Status;
+                edit.Description = list.Description;
+
+                entity.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
                 return false;
             }
 
         }
- */
+        public bool AddCourse(CourseList list)
+        {
+            try
+            {
+                Cours obj = new Cours();
+                obj.Image = list.Image;
+                obj.Name = list.Name;
+                obj.Status = true;
+                obj.Description = list.Description;
+                entity.Courses.Add(obj);
+                entity.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
+        }
+        public bool DeleteCourse(int id)
+        {
+            var delete = entity.Courses.Where(x => x.id == id).FirstOrDefault();
+
+            try
+            {
+
+
+                delete.Status =false ;
+               
+
+                entity.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
+        }
     }
 }

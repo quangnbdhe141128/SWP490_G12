@@ -1,0 +1,72 @@
+﻿@model PetHolaKingdom.Helpers.CourseList
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout_cms.cshtml";
+}
+
+@if (TempData["Notify"] != null)
+{
+    <div class="alert alert-success" id="notify">
+        @TempData["Notify"]
+    </div>
+}
+@using (Html.BeginForm("Add", "CourseManage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Files, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Files, new { type = "file", name = "Files", @class = "col-md-10", accept = "image/png, image/gif, image/jpeg" })
+                @Html.ValidationMessageFor(model => model.Files, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @id = "CKEditor" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section scripts {
+    <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("CKEditor");
+        CKEDITOR.instances['CKEditor'].setData($('#CKEditor').val());
+    </script>
+    <script>
+        $('form').submit(function () {
+            // Upate textarea value with the ckeditor data
+            $('#CKEditor').val(CKEDITOR.instances['CKEditor'].getData());
+        });
+    </script>
+}
+
+
+
