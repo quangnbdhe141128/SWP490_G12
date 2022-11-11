@@ -305,6 +305,7 @@
     <Content Include="Assets\images\big\img5.jpg" />
     <Content Include="Assets\images\big\img6.jpg" />
     <Content Include="Assets\images\cho-canh.jpg" />
+    <Content Include="Assets\images\course\anh1.jpg" />
     <Content Include="Assets\images\custom-select.png" />
     <Content Include="Assets\images\favicon.png" />
     <Content Include="Assets\images\fe.png" />
@@ -2756,6 +2757,7 @@
     <Content Include="Views\CourseManage\Index.cshtml" />
     <Content Include="Views\Shared\_Layout_cms.cshtml" />
     <Content Include="Views\CourseManage\Edit.cshtml" />
+    <Content Include="Views\CourseManage\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

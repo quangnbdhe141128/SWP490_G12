@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static System.Collections.Specialized.BitVector32;
 
 namespace PetHolaKingdom.Helpers
 {
@@ -28,9 +29,11 @@ namespace PetHolaKingdom.Helpers
         public int Id { get; set; }
         [Required]
         [StringLength(200)]
-        public string Name { get; set; }       
+        public string Name { get; set; }
+        [AllowHtml]
         public string Description { get; set; }
         public string Image { get; set; }
+        public List<HttpPostedFileBase> Files { get; set; }
 
         public bool Status { get; set; }
 

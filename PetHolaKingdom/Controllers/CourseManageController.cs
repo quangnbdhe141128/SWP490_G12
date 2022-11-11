@@ -20,37 +20,87 @@ namespace PetHolaKingdom.Controllers
             ViewBag.KeySearch = keysearch;
             return View(course.GetCourseList(keysearch).ToPagedList(page, pageSize));
         }
-        [Route("CourseManage/Edit/{id?}")]
-        public ActionResult Edit(int? id)
+        [HttpGet]
+        public ActionResult Edit(int id)
         {
-            var obj = entity.Courses.Where(x => x.id == id).FirstOrDefault();
-            CourseList objView = new CourseList { Name = obj.Name,Description=obj.Description,Image=obj.Image, Status = obj.Status };
-            return View(objView);
+            
+            CourseList list = course.GetEditCourseById(id);
+            return View(list);
         }
         [HttpPost]
-        [Route("CourseManage/Edit/{id?}")]
-        public ActionResult Edit(CourseList list, int id)
+        public ActionResult Edit(CourseList list)
         {
             if (ModelState.IsValid)
             {
-                try
+                if (list.Files[0] != null)
                 {
-                    var edit = entity.Courses.Where(x => x.id == id).FirstOrDefault();
-                    edit.Name = list.Name;
-                    edit.Status = list.Status;
-                    edit.Description = list.Description;
-                    edit.Image = list.Image;
-                    entity.SaveChanges();
-                    TempData["Notify"] = "Cập nhật mới thành công";
+                   // if (list.Files[0].ContentType == "image/png" && list.Files[0].ContentType == "image/jpeg")
+                 //   {
+                        list.Files[0].SaveAs(HttpContext.Server.MapPath("~/Assets/images/course/") + list.Files[0].FileName);
+                        list.Image = list.Files[0].FileName;
+                  //  }
+                //    else
+                 //   {
+                  //      TempData["Notify"] = "Only access image file";
+                 //       return View();
+                  //  }
+
                 }
-                catch(Exception)
+                if (course.EditCourse(list))
+                {
+                    TempData["Notify"] = "Update sucess";
+                    return RedirectToAction("Index", "CourseManage");
+                }
+                else
                 {
                     TempData["Notify"] = "Có lỗi xảy ra";
                 }
-                          
-                return RedirectToAction("Index", "CourseManage");
             }
             return View(list);
+        }
+        [HttpGet]
+        public ActionResult Add()
+        {
+
+            CourseList list = new CourseList();
+            return View(list);
+        }
+        public ActionResult Add(CourseList list)
+        {
+
+            if (ModelState.IsValid)
+            {
+                if (list.Files[0] != null)
+                {
+                    // if (list.Files[0].ContentType == "image/png" && list.Files[0].ContentType == "image/jpeg")
+                    //   {
+                    list.Files[0].SaveAs(HttpContext.Server.MapPath("~/Assets/images/course/") + list.Files[0].FileName);
+                    list.Image = list.Files[0].FileName;
+                    //  }
+                    //    else
+                    //   {
+                    //      TempData["Notify"] = "Only access image file";
+                    //       return View();
+                    //  }
+
+                }
+                if (course.AddCourse(list))
+                {
+                    TempData["Notify"] = "Update sucess";
+                    return RedirectToAction("Index", "CourseManage");
+                }
+                else
+                {
+                    TempData["Notify"] = "Có lỗi xảy ra";
+                }
+            }
+            return View(list);
+        }
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            course.DeleteCourse(id);
+            return RedirectToAction("Index");
         }
     }
 }

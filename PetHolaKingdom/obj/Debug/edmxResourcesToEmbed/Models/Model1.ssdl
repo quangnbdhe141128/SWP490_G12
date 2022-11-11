@@ -29,12 +29,12 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
     <Property Name="Image" Type="ntext" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="ntext" />
+    <Property Name="CreatedDate" Type="datetime" />
     <Property Name="CurriculumId" Type="int" />
-    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Status" Type="bit" />
   </EntityType>
   <EntityType Name="Curriculum">
     <Key>
